@@ -130,7 +130,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Card className="overflow-hidden border-0 shadow-lg">
               <div className="relative h-64">
-                <Image src="/id-photo.jpg" alt="Ảnh thẻ" fill className="object-cover" />
+                <Image src="https://picsum.photos/350/250" alt="Ảnh thẻ" fill className="object-cover" />
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-2">Ảnh Thẻ & Hộ Chiếu</h3>
@@ -142,7 +142,7 @@ export default function Home() {
 
             <Card className="overflow-hidden border-0 shadow-lg">
               <div className="relative h-64">
-                <Image src="/portrait.jpg" alt="Ảnh chân dung" fill className="object-cover" />
+                <Image src="https://picsum.photos/350/250" alt="Ảnh chân dung" fill className="object-cover" />
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-2">Chụp Ảnh Chân Dung</h3>
@@ -154,7 +154,7 @@ export default function Home() {
 
             <Card className="overflow-hidden border-0 shadow-lg">
               <div className="relative h-64">
-                <Image src="/restoration.jpg" alt="Phục hồi ảnh" fill className="object-cover" />
+                <Image src="https://picsum.photos/350/250" alt="Phục hồi ảnh" fill className="object-cover" />
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-2">Phục Hồi Ảnh Cũ</h3>
@@ -166,7 +166,7 @@ export default function Home() {
 
             <Card className="overflow-hidden border-0 shadow-lg">
               <div className="relative h-64">
-                <Image src="/profile.jpg" alt="Ảnh hồ sơ" fill className="object-cover" />
+                <Image src="https://picsum.photos/350/250" alt="Ảnh hồ sơ" fill className="object-cover" />
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-2">Ảnh Hồ Sơ Chuyên Nghiệp</h3>
@@ -176,7 +176,7 @@ export default function Home() {
 
             <Card className="overflow-hidden border-0 shadow-lg">
               <div className="relative h-64">
-                <Image src="/personal.jpg" alt="Ảnh cá nhân" fill className="object-cover" />
+                <Image src="https://picsum.photos/350/250" alt="Ảnh cá nhân" fill className="object-cover" />
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-2">Chụp Ảnh Cá Nhân</h3>
@@ -188,7 +188,7 @@ export default function Home() {
 
             <Card className="overflow-hidden border-0 shadow-lg">
               <div className="relative h-64">
-                <Image src="/delivery.jpg" alt="Giao hàng tận nơi" fill className="object-cover" />
+                <Image src="https://picsum.photos/350/250" alt="Giao hàng tận nơi" fill className="object-cover" />
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-2">Giao Hàng Tận Nơi</h3>
@@ -357,7 +357,7 @@ export default function Home() {
             <TestimonialCard
               name="Minh Nguyễn"
               role="Chuyên Gia Kinh Doanh"
-              image="/testimonial-1.jpg"
+              image="https://i.pravatar.cc/100"
               rating={5}
               testimonial="Đội ngũ tại Nhật Studio đã làm rất tốt với ảnh hồ sơ LinkedIn của tôi. Rất chuyên nghiệp và kết quả vượt quá mong đợi của tôi!"
             />
@@ -365,7 +365,7 @@ export default function Home() {
             <TestimonialCard
               name="Linh Trần"
               role="Sinh Viên"
-              image="/testimonial-2.jpg"
+              image="https://i.pravatar.cc/100"
               rating={5}
               testimonial="Tôi cần ảnh hộ chiếu gấp cho đơn xin visa. Ảnh được hoàn thành trong vài phút và đáp ứng hoàn hảo mọi yêu cầu. Dịch vụ tuyệt vời!"
             />
@@ -373,7 +373,7 @@ export default function Home() {
             <TestimonialCard
               name="Hải Phạm"
               role="Khách Hàng Gia Đình"
-              image="/testimonial-3.jpg"
+              image="https://i.pravatar.cc/100"
               rating={4}
               testimonial="Chúng tôi đã chụp ảnh gia đình ở đây và ảnh rất đẹp. Nhiếp ảnh gia rất kiên nhẫn với con của chúng tôi và đã ghi lại những khoảnh khắc tuyệt vời."
             />
@@ -397,7 +397,7 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <MapPin className="text-rose-500 mt-1 flex-shrink-0" />
-                  <p>123 Đường Nhiếp Ảnh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam</p>
+                  <p>254/9 Hoàng Diệu, Đà Nẵng, Việt Nam</p>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Phone className="text-rose-500 flex-shrink-0" />
@@ -432,7 +432,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px]">
               <Image
-                src="/photographer.jpg"
+                src="https://picsum.photos/500"
                 alt="Nhiếp ảnh gia chuyên nghiệp"
                 fill
                 className="object-cover rounded-lg"
@@ -440,7 +440,7 @@ export default function Home() {
             </div>
 
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Về Tôi</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Vài nét về Nhật Studio</h2>
               <p className="text-lg text-gray-600 mb-4">
                 Xin chào! Tôi là Nhật, một nhiếp ảnh gia chuyên nghiệp với hơn 10 năm kinh nghiệm chuyên về chụp ảnh
                 chân dung và ảnh thẻ.
@@ -561,7 +561,7 @@ export default function Home() {
               <ul className="space-y-2">
                 <li className="flex items-start space-x-3">
                   <MapPin className="text-rose-400 mt-1 flex-shrink-0" size={18} />
-                  <span className="text-gray-300">123 Đường Nhiếp Ảnh, Quận 1, Thành phố Hồ Chí Minh</span>
+                  <span className="text-gray-300">254/9 Hoàng Diệu, Đà Nẵng, Việt Nam</span>
                 </li>
                 <li className="flex items-center space-x-3">
                   <Phone className="text-rose-400 flex-shrink-0" size={18} />
