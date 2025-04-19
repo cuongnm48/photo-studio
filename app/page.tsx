@@ -1,13 +1,35 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import TestimonialCard from "@/components/testimonial-card"
-import PricingCard from "@/components/pricing-card"
-import ServiceCard from "@/components/service-card"
+import Image from "next/image";
+import Link from "next/link";
+import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import TestimonialCard from "@/components/testimonial-card";
+import PricingCard from "@/components/pricing-card";
+import ServiceCard from "@/components/service-card";
+import Banner from "@/components/banner";
 
 export default function Home() {
+  const services = [
+    {
+      title: "Ảnh Thẻ & Hộ Chiếu",
+      description: "Chụp ảnh thẻ đạt chuẩn cho mọi loại giấy tờ",
+      image: "https://picsum.photos/id/1012/600/400",
+      link: "/anh-the-ho-chieu",
+    },
+    {
+      title: "Ảnh Hồ Sơ Chuyên Nghiệp",
+      description: "Tôn vinh vẻ đẹp tự nhiên của bạn",
+      image: "https://picsum.photos/id/1027/600/400",
+      link: "/anh-ho-so-chuyen-nghiep",
+    },
+    {
+      title: "Phục Hồi Ảnh Cũ",
+      description: "Tạo ấn tượng chuyên nghiệp cho hồ sơ của bạn",
+      image: "https://picsum.photos/id/1066/600/400",
+      link: "/phuc-hoi-anh-cu",
+    },
+  ];
+
   return (
     <main className="min-h-screen flex flex-col">
       {/* Header */}
@@ -22,19 +44,31 @@ export default function Home() {
             </Link>
 
             <nav className="hidden md:flex items-center space-x-8">
-              <Link href="#services" className="text-gray-600 hover:text-rose-500 transition-colors">
+              <Link
+                href="/#services"
+                className="text-gray-600 hover:text-rose-500 transition-colors"
+              >
                 Dịch Vụ
               </Link>
-              <Link href="#pricing" className="text-gray-600 hover:text-rose-500 transition-colors">
+              <Link
+                href="/#pricing"
+                className="text-gray-600 hover:text-rose-500 transition-colors"
+              >
                 Bảng Giá
               </Link>
-              <Link href="#about" className="text-gray-600 hover:text-rose-500 transition-colors">
+              <Link href="/#about" className="text-gray-600 hover:text-rose-500 transition-colors">
                 Về Chúng Tôi
               </Link>
-              <Link href="#testimonials" className="text-gray-600 hover:text-rose-500 transition-colors">
+              <Link
+                href="/#testimonials"
+                className="text-gray-600 hover:text-rose-500 transition-colors"
+              >
                 Đánh Giá
               </Link>
-              <Link href="#contact" className="text-gray-600 hover:text-rose-500 transition-colors">
+              <Link
+                href="/#contact"
+                className="text-gray-600 hover:text-rose-500 transition-colors"
+              >
                 Liên Hệ
               </Link>
             </nav>
@@ -53,37 +87,67 @@ export default function Home() {
       </header>
 
       {/* Banner Section */}
-      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white">
-        <div className="absolute inset-0 opacity-30">
-          <Image src="/banner-bg.jpg" alt="Nền chụp ảnh" fill className="object-cover" priority />
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32 relative z-10">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">Lưu Giữ Khoảnh Khắc Hoàn Hảo</h1>
-              <p className="text-lg md:text-xl text-gray-200 max-w-lg">
-                Dịch vụ chụp ảnh chuyên nghiệp cho ảnh thẻ, chân dung và các dịp đặc biệt với chỉnh sửa chuyên nghiệp.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="bg-rose-500 hover:bg-rose-600">
-                  Đặt Lịch Ngay
-                </Button>
-                <Button size="lg" variant="outline" className="text-black border-white hover:bg-white/10">
-                  Xem Bộ Sưu Tập
-                </Button>
-              </div>
-            </div>
-            <div className="hidden md:block">
-              <div className="relative h-[400px] w-full">
-                <Image src="https://picsum.photos/500/300" alt="Máy ảnh chuyên nghiệp" fill className="object-contain" />
-              </div>
-            </div>
+      <Banner />
+
+      {/* Second Section - Photography Services */}
+      <section id="services" className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900">Dịch Vụ Chụp Ảnh</h2>
+            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+              Chụp ảnh chuyên nghiệp cho mọi nhu cầu của bạn, từ ảnh thẻ đến ảnh chân dung
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <Card
+                className="overflow-hidden border-0 shadow-lg transition-all duration-300 hover:scale-105"
+                key={index}
+              >
+                <div className="relative h-64">
+                  <Link
+                    href={service.link}
+                    className="text-rose-500 hover:text-rose-700 font-medium flex items-center gap-2"
+                  >
+                    <Image src={service.image} alt="Ảnh thẻ" fill className="object-cover" />
+                  </Link>
+                </div>
+                <CardContent className="p-6 h-32">
+                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                  <p className="text-gray-600">{service.description}</p>
+                </CardContent>
+                <CardFooter>
+                  <Link
+                    href={service.link}
+                    className="text-rose-500 hover:text-rose-700 font-medium flex items-center gap-2"
+                  >
+                    Xem chi tiết
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-right"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </Link>
+                </CardFooter>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
       {/* First Section - Photo Enhancement */}
-      <section id="services" className="py-16 bg-white">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">Dịch Vụ Chỉnh Sửa Ảnh</h2>
@@ -113,90 +177,6 @@ export default function Home() {
               title="Lưu Trữ Vĩnh Viễn"
               description="Ảnh của bạn được lưu trữ an toàn vĩnh viễn với quyền truy cập dễ dàng khi bạn cần"
             />
-          </div>
-        </div>
-      </section>
-
-      {/* Second Section - Photography Services */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900">Dịch Vụ Chụp Ảnh</h2>
-            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-              Chụp ảnh chuyên nghiệp cho mọi nhu cầu của bạn, từ ảnh thẻ đến ảnh chân dung
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="overflow-hidden border-0 shadow-lg">
-              <div className="relative h-64">
-                <Image src="https://picsum.photos/350/250" alt="Ảnh thẻ" fill className="object-cover" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-2">Ảnh Thẻ & Hộ Chiếu</h3>
-                <p className="text-gray-600">
-                  Ảnh thẻ và hộ chiếu đáp ứng mọi yêu cầu chính thức. Sẵn sàng trong vài phút.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden border-0 shadow-lg">
-              <div className="relative h-64">
-                <Image src="https://picsum.photos/350/250" alt="Ảnh chân dung" fill className="object-cover" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-2">Chụp Ảnh Chân Dung</h3>
-                <p className="text-gray-600">
-                  Ảnh chân dung chuyên nghiệp thể hiện cá tính và giúp bạn trông đẹp nhất.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden border-0 shadow-lg">
-              <div className="relative h-64">
-                <Image src="https://picsum.photos/350/250" alt="Phục hồi ảnh" fill className="object-cover" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-2">Phục Hồi Ảnh Cũ</h3>
-                <p className="text-gray-600">
-                  Khôi phục ảnh cũ và hư hỏng với dịch vụ phục hồi chuyên nghiệp của chúng tôi.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden border-0 shadow-lg">
-              <div className="relative h-64">
-                <Image src="https://picsum.photos/350/250" alt="Ảnh hồ sơ" fill className="object-cover" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-2">Ảnh Hồ Sơ Chuyên Nghiệp</h3>
-                <p className="text-gray-600">Nổi bật trên LinkedIn và các nền tảng khác với ảnh hồ sơ chuyên nghiệp.</p>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden border-0 shadow-lg">
-              <div className="relative h-64">
-                <Image src="https://picsum.photos/350/250" alt="Ảnh cá nhân" fill className="object-cover" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-2">Chụp Ảnh Cá Nhân</h3>
-                <p className="text-gray-600">
-                  Lưu giữ khoảnh khắc đặc biệt cùng bạn bè và gia đình trong studio chuyên nghiệp của chúng tôi.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden border-0 shadow-lg">
-              <div className="relative h-64">
-                <Image src="https://picsum.photos/350/250" alt="Giao hàng tận nơi" fill className="object-cover" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-2">Giao Hàng Tận Nơi</h3>
-                <p className="text-gray-600">
-                  Nhận ảnh in của bạn được giao trực tiếp đến tận nhà để thuận tiện tối đa.
-                </p>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
@@ -284,7 +264,8 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold mb-2">Giá Tốt Nhất</h3>
               <p className="text-gray-600">
-                Chúng tôi cung cấp mức giá cạnh tranh nhất trên thị trường mà không ảnh hưởng đến chất lượng.
+                Chúng tôi cung cấp mức giá cạnh tranh nhất trên thị trường mà không ảnh hưởng đến
+                chất lượng.
               </p>
             </div>
 
@@ -307,7 +288,8 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold mb-2">Ảnh Đẹp</h3>
               <p className="text-gray-600">
-                Nhiếp ảnh gia của chúng tôi là chuyên gia về bố cục, ánh sáng và nắm bắt góc đẹp nhất của bạn.
+                Nhiếp ảnh gia của chúng tôi là chuyên gia về bố cục, ánh sáng và nắm bắt góc đẹp
+                nhất của bạn.
               </p>
             </div>
 
@@ -336,7 +318,8 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold mb-2">Dịch Vụ Tận Tâm</h3>
               <p className="text-gray-600">
-                Đội ngũ thân thiện của chúng tôi cam kết cung cấp dịch vụ cá nhân hóa và đảm bảo sự hài lòng của bạn.
+                Đội ngũ thân thiện của chúng tôi cam kết cung cấp dịch vụ cá nhân hóa và đảm bảo sự
+                hài lòng của bạn.
               </p>
             </div>
           </div>
@@ -442,20 +425,22 @@ export default function Home() {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Vài nét về Nhật Studio</h2>
               <p className="text-lg text-gray-600 mb-4">
-                Xin chào! Tôi là Nhật, một nhiếp ảnh gia chuyên nghiệp với hơn 10 năm kinh nghiệm chuyên về chụp ảnh
-                chân dung và ảnh thẻ.
+                Xin chào! Tôi là Nhật, một nhiếp ảnh gia chuyên nghiệp với hơn 10 năm kinh nghiệm
+                chuyên về chụp ảnh chân dung và ảnh thẻ.
               </p>
               <p className="text-lg text-gray-600 mb-4">
-                Niềm đam mê nhiếp ảnh của tôi bắt đầu từ khi tôi còn là một thiếu niên, và tôi đã không ngừng trau dồi
-                kỹ năng kể từ đó. Tôi thành lập Nhật Studio với sứ mệnh cung cấp dịch vụ chụp ảnh chất lượng cao với giá
-                cả phải chăng.
+                Niềm đam mê nhiếp ảnh của tôi bắt đầu từ khi tôi còn là một thiếu niên, và tôi đã
+                không ngừng trau dồi kỹ năng kể từ đó. Tôi thành lập Nhật Studio với sứ mệnh cung
+                cấp dịch vụ chụp ảnh chất lượng cao với giá cả phải chăng.
               </p>
               <p className="text-lg text-gray-600 mb-4">
-                Tôi tin rằng mọi người đều xứng đáng có những bức ảnh đẹp thể hiện con người tốt nhất của họ. Dù bạn cần
-                một tấm ảnh thẻ đơn giản hay một bức chân dung chuyên nghiệp, tôi cam kết mang đến kết quả xuất sắc.
+                Tôi tin rằng mọi người đều xứng đáng có những bức ảnh đẹp thể hiện con người tốt
+                nhất của họ. Dù bạn cần một tấm ảnh thẻ đơn giản hay một bức chân dung chuyên
+                nghiệp, tôi cam kết mang đến kết quả xuất sắc.
               </p>
               <p className="text-lg text-gray-600 mb-6">
-                Tôi mong được chào đón bạn đến studio của chúng tôi và giúp bạn tạo ra những kỷ niệm đẹp!
+                Tôi mong được chào đón bạn đến studio của chúng tôi và giúp bạn tạo ra những kỷ niệm
+                đẹp!
               </p>
               <div className="flex space-x-4">
                 <Link href="#" className="text-rose-500 hover:text-rose-600">
@@ -477,7 +462,8 @@ export default function Home() {
             <div>
               <h3 className="text-xl font-bold mb-4">Nhật Studio</h3>
               <p className="text-gray-300 mb-4">
-                Dịch vụ chụp ảnh chuyên nghiệp cho mọi nhu cầu của bạn. Ảnh chất lượng với giá cả phải chăng.
+                Dịch vụ chụp ảnh chuyên nghiệp cho mọi nhu cầu của bạn. Ảnh chất lượng với giá cả
+                phải chăng.
               </p>
               <div className="flex space-x-4">
                 <Link href="#" className="text-gray-300 hover:text-white">
@@ -581,5 +567,5 @@ export default function Home() {
         </div>
       </footer>
     </main>
-  )
+  );
 }
