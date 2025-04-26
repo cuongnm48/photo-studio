@@ -1,36 +1,23 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Header from "@/components/header";
-import { Facebook, Instagram } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Footer from "@/components/footer";
+import Header from "@/components/header";
+import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Phục Hồi Ảnh Cũ - Photo Studio',
+  description: 'Dịch vụ phục hồi ảnh cũ chuyên nghiệp với công nghệ hiện đại. Khôi phục ảnh bị hư hỏng, rách, phai màu thành ảnh mới với chất lượng cao.',
+  openGraph: {
+    title: 'Phục Hồi Ảnh Cũ - Photo Studio',
+    description: 'Dịch vụ phục hồi ảnh cũ chuyên nghiệp với công nghệ hiện đại. Khôi phục ảnh bị hư hỏng, rách, phai màu thành ảnh mới với chất lượng cao.',
+    images: [{
+      url: 'https://picsum.photos/id/1059/1200/630',
+      width: 1200,
+      height: 630,
+    }],
+  },
+}
 
 export default function PhucHoiAnhCu() {
-  // Các mẫu ảnh phục hồi
-  const restorationSamples = [
-    {
-      id: "sample1",
-      title: "Ảnh gia đình thập niên 80",
-      beforeImage: "https://picsum.photos/id/1059/600/800",
-      afterImage: "https://picsum.photos/id/1068/600/800",
-      description: "Phục hồi màu sắc, xử lý vết nứt và làm sắc nét",
-    },
-    {
-      id: "sample2",
-      title: "Ảnh cưới thập niên 70",
-      beforeImage: "https://picsum.photos/id/1060/600/800",
-      afterImage: "https://picsum.photos/id/1069/600/800",
-      description: "Khôi phục chi tiết, cân bằng màu sắc và loại bỏ vết bẩn",
-    },
-    {
-      id: "sample3",
-      title: "Ảnh chân dung thập niên 60",
-      beforeImage: "https://picsum.photos/id/1061/600/800",
-      afterImage: "https://picsum.photos/id/1070/600/800",
-      description: "Phục hồi độ tương phản, làm sắc nét và tái tạo chi tiết bị mất",
-    },
-  ];
 
   // Các dịch vụ phục hồi
   const restorationServices = [

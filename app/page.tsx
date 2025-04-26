@@ -1,25 +1,32 @@
-import Image from "next/image";
-import Link from "next/link";
+import Banner from "@/components/banner";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
+import ServiceCard from "@/components/service-card";
+import TestimonialCard from "@/components/testimonial-card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
-  ExternalLink,
-  Facebook,
   FacebookIcon,
-  Instagram,
-  LinkIcon,
   Mail,
   MapPin,
   MessageCircle,
-  MessageSquare,
-  Phone,
+  Phone
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import TestimonialCard from "@/components/testimonial-card";
-import PricingCard from "@/components/pricing-card";
-import ServiceCard from "@/components/service-card";
-import Banner from "@/components/banner";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Nhật Studio - Chụp ảnh thẻ & hồ sơ chuyên nghiệp tại Đà Nẵng",
+  description: "Dịch vụ chụp ảnh thẻ, hộ chiếu, visa và hồ sơ chuyên nghiệp. Chất lượng cao, lấy ngay tại Đà Nẵng.",
+  openGraph: {
+    title: "Nhật Studio - Chụp ảnh thẻ & hồ sơ chuyên nghiệp tại Đà Nẵng",
+    description: "Dịch vụ chụp ảnh thẻ, hộ chiếu, visa và hồ sơ chuyên nghiệp. Chất lượng cao, lấy ngay tại Đà Nẵng.",
+    url: "https://nhatstudio.com",
+    siteName: "Nhật Studio",
+    locale: "vi_VN",
+    type: "website",
+  },
+}
 
 export default function Home() {
   const services = [
@@ -45,10 +52,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex flex-col">
-      {/* Header */}
       <Header />
-
-      {/* Banner Section */}
       <Banner />
 
       {/* Second Section - Photography Services */}
@@ -277,7 +281,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Google Map Section */}
+      {/* Contact Information Section */}
       <section id="contact" className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -294,15 +298,31 @@ export default function Home() {
               <div className="space-y-4 flex-grow">
                 <div className="flex items-start space-x-3">
                   <MapPin className="text-rose-500 mt-1 flex-shrink-0" />
-                  <p>254/9 Hoàng Diệu, Đà Nẵng, Việt Nam</p>
+                  <a 
+                    href="https://maps.google.com/?q=254/9+Hoàng+Diệu,+Đà+Nẵng"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-blue-300 transition-colors"
+                  >
+                    254/9 Hoàng Diệu, Đà Nẵng, Việt Nam
+                  </a>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Phone className="text-rose-500 flex-shrink-0" />
-                  <p>0909939351 | 0905098084</p>
+                  <div>
+                    <a href="tel:0909939351" className="hover:text-blue-300 transition-colors">0909939351</a>
+                    {" | "}
+                    <a href="tel:0905098084" className="hover:text-blue-300 transition-colors">0905098084</a>
+                  </div>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Mail className="text-rose-500 flex-shrink-0" />
-                  <p>nhatstudio.0909939351@gmail.com</p>
+                  <a 
+                    href="mailto:nhatstudio.0909939351@gmail.com"
+                    className="hover:text-blue-300 transition-colors"
+                  >
+                    nhatstudio.0909939351@gmail.com
+                  </a>
                 </div>
                 <div className="flex items-center space-x-3">
                   <MessageCircle className="text-rose-500 flex-shrink-0" />
@@ -333,19 +353,18 @@ export default function Home() {
                 <p>Chủ Nhật: 8:00 - 17:00</p>
               </div>
             </div>
-            {/* Address  */}
+
+            {/* Google Map */}
             <div className="bg-gray-200 rounded-lg overflow-hidden flex">
-              {/* This would be replaced with an actual Google Maps embed */}
-              <div className="w-full aspect-video rounded-xl overflow-hidden shadow-lg">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d239.63225401400408!2d108.21637842804198!3d16.059465841677223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219be4de295c1%3A0x32aa91831c5d6030!2zTkjhuqxUIFNUVURJTw!5e0!3m2!1svi!2s!4v1745597814112!5m2!1svi!2s"
-                  width="600"
-                  height="450"
-                  allowFullScreen={true}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d239.63225401400408!2d108.21637842804198!3d16.059465841677223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219be4de295c1%3A0x32aa91831c5d6030!2zTkjhuqxUIFNUVURJTw!5e0!3m2!1svi!2s!4v1745597814112!5m2!1svi!2s"
+                className="w-full aspect-video rounded-xl"
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Bản đồ đến Nhật Studio"
+                aria-label="Bản đồ chỉ đường đến Nhật Studio"
+              />
             </div>
           </div>
         </div>
@@ -389,7 +408,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
       <Footer />
     </main>
   );
