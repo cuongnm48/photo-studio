@@ -17,12 +17,12 @@ export default function Banner() {
 
   // Generate random photo IDs for consistency
   const photoIds = [
-    { id: 237, image_url: "/DSC_3637a.jpg" },
-    { id: 433, image_url: "/DSC_3637a.png" },
+    { id: 4333, image_url: "https://res.cloudinary.com/dgsn0xio7/image/upload/f_auto,q_auto:best/v1745637914/banner-homepage/test_sr1i4y.png" },
+    { id: 433, image_url: "https://res.cloudinary.com/dgsn0xio7/image/upload/f_auto,q_auto:best,w_387,h_516/v1745637914/banner-homepage/test_sr1i4y.png" },
     { id: 823, image_url: "/DSC_3637a (1).png" },
-    { id: 1027, image_url: "https://picsum.photos/id/1027/600/800" },
-    { id: 1035, image_url: "https://picsum.photos/id/1035/600/800" },
-    { id: 1074, image_url: "https://picsum.photos/id/1074/600/800" },
+    { id: 1027, image_url: "https://picsum.photos/id/1074/600/800" },
+    { id: 10227, image_url: "https://picsum.photos/id/1074/600/800" },
+    { id: 1035, image_url: "https://picsum.photos/id/1074/600/800" },
   ];
 
   if (!mounted) return null
@@ -78,6 +78,7 @@ export default function Banner() {
                     src={photo.image_url}
                     alt={`Sample photo ${index + 1}`}
                     fill
+                    priority
                   />
                 </div>
               ))}
