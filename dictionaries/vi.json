@@ -1,0 +1,256 @@
+{
+  "metadata": {
+    "title": "Nhật Studio - Dịch Vụ Chụp Ảnh Chuyên Nghiệp",
+    "description": "Dịch vụ chụp ảnh chuyên nghiệp cho ảnh thẻ, chân dung và các dịp đặc biệt với chỉnh sửa chuyên nghiệp"
+  },
+  "home": {
+    "banner": {
+      "aria_label": "Giới thiệu Studio",
+      "background_alt": "Nhật Studio - Dịch vụ chụp ảnh chuyên nghiệp",
+      "title": "Nhật Studio",
+      "description": "\"Chúng tôi chuyên cung cấp dịch vụ chụp ảnh chuyên nghiệp với nhiều năm kinh nghiệm. Từ ảnh thẻ, chân dung, profile đến ảnh gia đình, chúng tôi cam kết mang đến cho bạn những khoảnh khắc đẹp nhất.\"",
+      "cta_aria_label": "Đặt lịch chụp ảnh - Gọi 0909939351",
+      "photo_alt": "Mẫu ảnh chụp {index} tại Nhật Studio"
+    },
+    "services": {
+      "title": "Dịch Vụ Chụp Ảnh",
+      "subtitle": "Chụp ảnh chuyên nghiệp cho mọi nhu cầu của bạn, từ ảnh thẻ đến ảnh chân dung",
+      "items": [
+        {
+          "title": "Ảnh Thẻ, Hộ Chiếu & Visa",
+          "description": "Chụp ảnh thẻ đạt chuẩn cho mọi loại giấy tờ",
+          "link": "/vi/anh-the-ho-chieu",
+          "image": "https://picsum.photos/id/1066/600/400"
+        },
+        {
+          "title": "Chụp ảnh Profile cá nhân chuyên nghiệp",
+          "description": "Tôn vinh vẻ đẹp tự nhiên của bạn",
+          "link": "/vi/anh-ho-so-chuyen-nghiep",
+          "image": "https://picsum.photos/id/1066/600/400"
+        },
+        {
+          "title": "Phục Hồi Ảnh Cũ",
+          "description": "Tạo ấn tượng chuyên nghiệp cho hồ sơ của bạn",
+          "link": "/vi/phuc-hoi-anh-cu",
+          "image": "https://picsum.photos/id/1066/600/400"
+        }
+      ],
+      "view_details": "Xem chi tiết"
+    },
+    "photo_editing": {
+      "title": "Dịch Vụ Chỉnh Sửa Ảnh",
+      "subtitle": "Biến đổi ảnh của bạn với dịch vụ chỉnh sửa và nâng cao chuyên nghiệp của chúng tôi",
+      "services": [
+        {
+          "title": "Xóa Phông Nền",
+          "description": "Xóa phông nền chuyên nghiệp cho bất kỳ bức ảnh nào với đường viền sạch và kết quả hoàn hảo"
+        },
+        {
+          "title": "Trang Điểm Bằng Phần Mềm",
+          "description": "Chỉnh sửa chuyên nghiệp để nâng cao ảnh của bạn trong khi vẫn giữ vẻ tự nhiên"
+        },
+        {
+          "title": "Cân Đối Tỷ Lệ Vàng",
+          "description": "Tỷ lệ khuôn mặt hoàn hảo sử dụng tỷ lệ vàng cho ảnh cân đối và thẩm mỹ"
+        },
+        {
+          "title": "Lưu Trữ Vĩnh Viễn",
+          "description": "Ảnh của bạn được lưu trữ an toàn vĩnh viễn với quyền truy cập dễ dàng khi bạn cần"
+        }
+      ]
+    },
+    "about": {
+      "title": "Vài nét về Nhật Studio",
+      "content": [
+        "Xin chào! Tôi là Nhật, một nhiếp ảnh gia chuyên nghiệp với hơn 10 năm kinh nghiệm chuyên về chụp ảnh chân dung và ảnh thẻ.",
+        "Niềm đam mê nhiếp ảnh của tôi bắt đầu từ khi tôi còn là một thiếu niên, và tôi đã không ngừng trau dồi kỹ năng kể từ đó. Tôi thành lập Nhật Studio với sứ mệnh cung cấp dịch vụ chụp ảnh chất lượng cao với giá cả phải chăng.",
+        "Tôi tin rằng mọi người đều xứng đáng có những bức ảnh đẹp thể hiện con người tốt nhất của họ. Dù bạn cần một tấm ảnh thẻ đơn giản hay một bức chân dung chuyên nghiệp, tôi cam kết mang đến kết quả xuất sắc.",
+        "Tôi mong được chào đón bạn đến studio của chúng tôi và giúp bạn tạo ra những kỷ niệm đẹp!"
+      ]
+    },
+    "contact": {
+      "title": "Tìm Chúng Tôi",
+      "subtitle": "Ghé thăm studio của chúng tôi để sử dụng dịch vụ chụp ảnh chuyên nghiệp",
+      "contact_information": "Thông Tin Liên Hệ",
+      "address": "254/9 Hoàng Diệu, Đà Nẵng, Việt Nam",
+      "business_hours": {
+        "title": "Giờ mở cửa",
+        "weekday": "Thứ Hai - Thứ Bảy: 8:00 - 19:00",
+        "weekend": "Chủ Nhật: 8:00 - 17:00"
+      }
+    },
+    "why_choose_us": {
+      "title": "Tại Sao Chọn Chúng Tôi",
+      "subtitle": "Chúng tôi cam kết mang đến trải nghiệm chụp ảnh tốt nhất",
+      "features": [
+        {
+          "title": "Giá Tốt Nhất",
+          "description": "Chúng tôi cung cấp mức giá cạnh tranh nhất trên thị trường mà không ảnh hưởng đến chất lượng."
+        },
+        {
+          "title": "Ảnh Đẹp",
+          "description": "Nhiếp ảnh gia của chúng tôi là chuyên gia về bố cục, ánh sáng và nắm bắt góc đẹp nhất của bạn."
+        },
+        {
+          "title": "Dịch Vụ Tận Tâm",
+          "description": "Đội ngũ thân thiện của chúng tôi cam kết cung cấp dịch vụ cá nhân hóa và đảm bảo sự hài lòng của bạn."
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "Đánh Giá Từ Khách Hàng",
+      "subtitle": "Xem những gì khách hàng nói về trải nghiệm với chúng tôi",
+      "items": [
+        {
+          "name": "Minh Nguyễn",
+          "role": "Chuyên Gia Kinh Doanh",
+          "image": "https://i.pravatar.cc/150?img=52",
+          "rating": 5,
+          "testimonial": "Đội ngũ tại Nhật Studio đã làm rất tốt với ảnh hồ sơ LinkedIn của tôi. Rất chuyên nghiệp và kết quả vượt quá mong đợi của tôi!"
+        },
+        {
+          "name": "Linh Trần",
+          "role": "Sinh Viên",
+          "image": "https://i.pravatar.cc/150?img=31",
+          "rating": 5,
+          "testimonial": "Tôi cần ảnh hộ chiếu gấp cho đơn xin visa. Ảnh được hoàn thành trong vài phút và đáp ứng hoàn hảo mọi yêu cầu. Dịch vụ tuyệt vời!"
+        },
+        {
+          "name": "Hải Phạm",
+          "role": "Khách Hàng Gia Đình",
+          "image": "https://i.pravatar.cc/150?img=58",
+          "rating": 5,
+          "testimonial": "Chúng tôi đã chụp ảnh gia đình ở đây và ảnh rất đẹp. Nhiếp ảnh gia rất kiên nhẫn với con của chúng tôi và đã ghi lại những khoảnh khắc tuyệt vời."
+        }
+      ]
+    }
+  },
+  "common": {
+    "book_now": "Đặt Lịch",
+    "navigation": {
+      "title": "Liên Kết Nhanh",
+      "home": "Trang chủ",
+      "services": "Dịch Vụ",
+      "about": "Về Chúng Tôi",
+      "testimonials": "Đánh Giá",
+      "contact": "Liên hệ"
+    }
+  },
+  "footer": {
+    "about": {
+      "title": "Nhật Studio",
+      "description": "Dịch vụ chụp ảnh chuyên nghiệp cho mọi nhu cầu của bạn. Ảnh chất lượng với giá cả phải chăng."
+    },
+    "services": {
+      "title": "Dịch Vụ",
+      "items": {
+        "id_photos": "Ảnh Thẻ",
+        "portraits": "Chụp Ảnh Chân Dung",
+        "editing": "Chỉnh Sửa Ảnh",
+        "restoration": "Phục Hồi Ảnh Cũ",
+        "delivery": "Giao Hàng Tận Nơi"
+      }
+    },
+    "contact": {
+      "title": "Liên Hệ Chúng Tôi"
+    },
+    "copyright": "Copyright {year} Nhật Studio. All rights reserved."
+  },
+  "professional_profile": {
+    "hero": {
+      "title": "Chụp ảnh Profile cá nhân chuyên nghiệp",
+      "subtitle": "Tạo ấn tượng trong mắt nhà tuyển dụng với ảnh hồ sơ chất lượng cao"
+    },
+    "intro": {
+      "title": "Dịch vụ chụp ảnh hồ sơ chuyên nghiệp",
+      "description": "Nhật Studio cung cấp dịch vụ chụp ảnh hồ sơ chuyên nghiệp, giúp bạn tạo ấn tượng tốt nhất trong môi trường công sở và kinh doanh. Chúng tôi hiểu rằng một tấm ảnh hồ sơ chuyên nghiệp có thể mang lại nhiều cơ hội cho sự nghiệp của bạn."
+    },
+    "tips": {
+      "title": "Mẹo chụp ảnh hồ sơ chuyên nghiệp",
+      "outfit": {
+        "title": "Trang phục",
+        "tips": [
+          "Chọn trang phục công sở lịch sự, phù hợp với ngành nghề",
+          "Ưu tiên màu sắc trung tính, tránh họa tiết quá rực rỡ",
+          "Nam giới nên mặc áo sơ mi, vest; nữ giới có thể mặc áo sơ mi, áo blazer"
+        ]
+      },
+      "expression": {
+        "title": "Biểu cảm",
+        "tips": [
+          "Nụ cười tự nhiên, thân thiện nhưng không quá rộng",
+          "Giữ ánh mắt tự tin, nhìn thẳng vào camera",
+          "Tư thế thẳng lưng, vai thả lỏng, thể hiện sự tự tin"
+        ]
+      }
+    },
+    "cta": {
+      "title": "Đặt lịch chụp ảnh hồ sơ chuyên nghiệp ngay hôm nay",
+      "description": "Hãy để Nhật Studio giúp bạn tạo ấn tượng chuyên nghiệp với ảnh hồ sơ chất lượng cao. Đặt lịch ngay hôm nay để được phục vụ tốt nhất!",
+      "book_now": "Đặt lịch ngay",
+      "contact": "Liên hệ tư vấn"
+    }
+  
+  },
+  "id_photos": {
+    "title": "Ảnh thẻ, hộ chiếu & visa - Nhật Studio",
+    "description": "Chụp ảnh thẻ đạt chuẩn cho mọi loại giấy tờ, hồ sơ với chất lượng cao tại Đà Nẵng",
+    "heading": "Chụp ảnh thẻ Đà Nẵng",
+    "subtitle": "Nhận luôn sản phẩm và chụp ảnh thẻ cho các bạn, các khách hàng thân quen tại Đà Nẵng. Mỗi bức ảnh Nhật chụp và chỉnh sửa đều mang một cảm xúc vào trong đó.",
+    "heading2": "Chụp ảnh thẻ Đà Nẵng",
+    "category": "Danh mục ảnh thẻ"
+  },
+  "photo_restoration": {
+    "title": "Phục Hồi Ảnh Cũ",
+    "description": "Khôi phục kỷ niệm quý giá của bạn với công nghệ phục hồi ảnh hiện đại",
+    "samples": {
+      "title": "Mẫu phục hồi ảnh"
+    },
+    "services": {
+      "title": "Các dịch vụ phục hồi ảnh",
+      "items": [
+        {
+          "title": "Phục hồi cơ bản",
+          "description": "Sửa chữa vết nứt, vết xước, làm sạch vết bẩn và cân bằng màu sắc"
+        },
+        {
+          "title": "Phục hồi nâng cao",
+          "description": "Tái tạo các phần bị mất, phục hồi chi tiết và cải thiện độ sắc nét"
+        },
+        {
+          "title": "Tô màu ảnh đen trắng",
+          "description": "Thêm màu sắc tự nhiên cho ảnh đen trắng dựa trên nghiên cứu lịch sử"
+        },
+        {
+          "title": "Phục hồi ảnh bị hư hỏng nặng",
+          "description": "Khôi phục ảnh bị rách, cháy, ố vàng hoặc bị hư hỏng nặng"
+        }
+      ]
+    },
+    "process": {
+      "title": "Quy trình phục hồi ảnh cũ",
+      "steps": [
+        {
+          "title": "1. Tiếp nhận và đánh giá",
+          "description": "Chúng tôi tiếp nhận ảnh cũ của bạn, đánh giá mức độ hư hỏng và lên kế hoạch phục hồi phù hợp."
+        },
+        {
+          "title": "2. Scan ảnh chất lượng cao",
+          "description": "Ảnh của bạn được scan với độ phân giải cao để đảm bảo giữ lại tất cả các chi tiết có thể."
+        },
+        {
+          "title": "3. Phục hồi kỹ thuật số",
+          "description": "Chuyên gia của chúng tôi sử dụng công nghệ hiện đại để sửa chữa các vết nứt, vết bẩn, và khôi phục màu sắc."
+        },
+        {
+          "title": "4. Kiểm tra và điều chỉnh",
+          "description": "Kết quả được kiểm tra kỹ lưỡng và điều chỉnh để đảm bảo chất lượng tốt nhất."
+        },
+        {
+          "title": "5. Bàn giao sản phẩm",
+          "description": "Bạn nhận được ảnh đã phục hồi dưới dạng file kỹ thuật số và bản in chất lượng cao (nếu yêu cầu)."
+        }
+      ]
+    }
+  }
+}

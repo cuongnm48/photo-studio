@@ -1,3 +1,5 @@
+import { getDictionary } from "@/app/[lang]/dictionaries";
+import { ValidLocale } from "@/lib/i18n/config";
 import { Metadata } from "next";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
@@ -60,10 +62,17 @@ const galleryImages = [
   },
 ];
 
-export default function AnhHoSoChuyenNghiep() {
+export default async function AnhHoSoChuyenNghiep({
+  params,
+}: {
+  params: { lang: ValidLocale };
+}) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+
   return (
     <main className="min-h-screen">
-      <Header />
+      <Header lang={lang} />
       
       {/* Hero Section */}
       <section 
@@ -73,7 +82,7 @@ export default function AnhHoSoChuyenNghiep() {
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-slate-900/60 z-10" />
         <Image
           src="https://picsum.photos/id/1070/1920/600"
-          alt="Chụp ảnh Profile cá nhân chuyên nghiệp"
+          alt={dict.professional_profile.hero.title}
           fill
           priority
           className="object-cover"
@@ -81,31 +90,26 @@ export default function AnhHoSoChuyenNghiep() {
         />
         <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center">
           <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            Chụp ảnh Profile cá nhân chuyên nghiệp
+            {dict.professional_profile.hero.title}
           </h1>
           <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl">
-            Tạo ấn tượng trong mắt nhà tuyển dụng với ảnh hồ sơ chất lượng cao
+            {dict.professional_profile.hero.subtitle}
           </p>
         </div>
       </section>
 
       {/* Introduction Section */}
-      <section
-        className="container mx-auto lg:px-4"
-        aria-label="Giới thiệu dịch vụ"
-      >
+      <section className="container mx-auto lg:px-4" aria-label="Giới thiệu dịch vụ">
         <div className="relative bg-gray-100 py-16">
           <div className="container mx-auto px-4 relative z-10">
             <div className="flex items-center justify-center mb-4">
               <CameraIcon className="h-10 w-10 mr-4 text-gray-700" />
               <h1 className="text-3xl font-bold text-gray-900">
-                Dịch vụ chụp ảnh hồ sơ chuyên nghiệp
+                {dict.professional_profile.intro.title}
               </h1>
             </div>
             <p className="text-center max-w-2xl mx-auto text-gray-600">
-              Nhật Studio cung cấp dịch vụ chụp ảnh hồ sơ chuyên nghiệp, giúp bạn tạo ấn tượng tốt
-              nhất trong môi trường công sở và kinh doanh. Chúng tôi hiểu rằng một tấm ảnh hồ sơ
-              chuyên nghiệp có thể mang lại nhiều cơ hội cho sự nghiệp của bạn.
+              {dict.professional_profile.intro.description}
             </p>
           </div>
         </div>
@@ -135,13 +139,15 @@ export default function AnhHoSoChuyenNghiep() {
                 />
               </div>
             ))}
+
             </div>
           </div>
 
-        {/* Tips */}
+        {/* Tips Section */}
         <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center">Mẹo chụp ảnh hồ sơ chuyên nghiệp</h2>
+          <h2 className="text-2xl font-bold mb-8 text-center">{dict.professional_profile.tips.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Outfit Tips */}
             <div className="bg-slate-50 p-6 rounded-lg">
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                 <svg
@@ -158,7 +164,7 @@ export default function AnhHoSoChuyenNghiep() {
                 >
                   <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" />
                 </svg>
-                Trang phục
+                {dict.professional_profile.tips.outfit.title}
               </h3>
               <ul className="space-y-2 text-slate-600">
                 <li className="flex items-center gap-2">
@@ -176,7 +182,7 @@ export default function AnhHoSoChuyenNghiep() {
                   >
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
-                  Chọn trang phục công sở lịch sự, phù hợp với ngành nghề
+                  {dict.professional_profile.tips.outfit.tips[0]}
                 </li>
                 <li className="flex items-center gap-2">
                   <svg
@@ -193,7 +199,7 @@ export default function AnhHoSoChuyenNghiep() {
                   >
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
-                  Ưu tiên màu sắc trung tính, tránh họa tiết quá rực rỡ
+                  {dict.professional_profile.tips.outfit.tips[1]}
                 </li>
                 <li className="flex items-center gap-2">
                   <svg
@@ -210,10 +216,11 @@ export default function AnhHoSoChuyenNghiep() {
                   >
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
-                  Nam giới nên mặc áo sơ mi, vest; nữ giới có thể mặc áo sơ mi, áo blazer
+                  {dict.professional_profile.tips.outfit.tips[2]}
                 </li>
               </ul>
             </div>
+            {/* Expression Tips */}
             <div className="bg-slate-50 p-6 rounded-lg">
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                 <svg
@@ -233,7 +240,7 @@ export default function AnhHoSoChuyenNghiep() {
                   <line x1="9" x2="9.01" y1="9" y2="9" />
                   <line x1="15" x2="15.01" y1="9" y2="9" />
                 </svg>
-                Biểu cảm
+                {dict.professional_profile.tips.expression.title}
               </h3>
               <ul className="space-y-2 text-slate-600">
                 <li className="flex items-center gap-2">
@@ -251,7 +258,7 @@ export default function AnhHoSoChuyenNghiep() {
                   >
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
-                  Nụ cười tự nhiên, thân thiện nhưng không quá rộng
+                  {dict.professional_profile.tips.expression.tips[0]}
                 </li>
                 <li className="flex items-center gap-2">
                   <svg
@@ -268,7 +275,7 @@ export default function AnhHoSoChuyenNghiep() {
                   >
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
-                  Giữ ánh mắt tự tin, nhìn thẳng vào camera
+                  {dict.professional_profile.tips.expression.tips[1]}
                 </li>
                 <li className="flex items-center gap-2">
                   <svg
@@ -285,7 +292,7 @@ export default function AnhHoSoChuyenNghiep() {
                   >
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
-                  Tư thế thẳng lưng, vai thả lỏng, thể hiện sự tự tin
+                  {dict.professional_profile.tips.expression.tips[2]}
                 </li>
               </ul>
             </div>
@@ -295,17 +302,16 @@ export default function AnhHoSoChuyenNghiep() {
         {/* CTA Section */}
         <div className="bg-slate-100 p-8 rounded-xl text-center" role="complementary">
           <h2 className="text-2xl font-bold mb-4">
-            Đặt lịch chụp ảnh hồ sơ chuyên nghiệp ngay hôm nay
+            {dict.professional_profile.cta.title}
           </h2>
           <p className="text-slate-600 mb-6 max-w-2xl mx-auto">
-            Hãy để Nhật Studio giúp bạn tạo ấn tượng chuyên nghiệp với ảnh hồ sơ chất lượng cao. Đặt
-            lịch ngay hôm nay để được phục vụ tốt nhất!
+            {dict.professional_profile.cta.description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="tel:0909939351">
               <Button className="bg-slate-800 hover:bg-slate-900 w-full sm:w-auto flex items-center gap-2">
                 <Phone size={16} />
-                Đặt lịch ngay
+                {dict.professional_profile.cta.book_now}
               </Button>
             </Link>
             <Link href="https://zalo.me/0909939351" target="_blank" rel="noopener noreferrer">
@@ -314,14 +320,14 @@ export default function AnhHoSoChuyenNghiep() {
                 className="border-slate-800 text-slate-800 hover:bg-slate-100 w-full sm:w-auto flex items-center gap-2"
               >
                 <MessageCircle size={16} />
-                Liên hệ tư vấn
+                {dict.professional_profile.cta.contact}
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      <Footer />
+      <Footer lang={lang} />
     </main>
   );
 }

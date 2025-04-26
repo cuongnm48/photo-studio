@@ -1,0 +1,258 @@
+{
+  "metadata": {
+    "title": "Nhat Studio - Professional Photography Services",
+    "description": "Professional photography services for ID photos, portraits and special occasions with professional editing"
+  },
+  "home": {
+    "banner": {
+      "aria_label": "Studio Introduction",
+      "background_alt": "Nhat Studio - Professional Photography Services",
+      "title": "Nhat Studio",
+      "description": "\"We specialize in professional photography services with years of experience. From ID photos, portraits, profiles to family photos, we are committed to bringing you the most beautiful moments.\"",
+      "cta_aria_label": "Book a photo session - Call 0909939351",
+      "photo_alt": "Sample photo {index} at Nhat Studio"
+    },
+    "services": {
+      "title": "Photography Services",
+      "subtitle": "Professional photography for all your needs, from ID photos to portraits",
+      "items": [
+        {
+          "title": "ID Photos, Passport & Visa",
+          "description": "Standard ID photos for all types of documents",
+          "link": "/en/id-passport-photos",
+          "image": "https://picsum.photos/id/1066/600/400"
+        },
+        {
+          "title": "Professional Profile Photography",
+          "description": "Highlighting your natural beauty",
+          "link": "/en/professional-profile-photos",
+          "image": "https://picsum.photos/id/1066/600/400"
+        },
+        {
+          "title": "Photo Restoration",
+          "description": "Create a professional impression for your profile",
+          "link": "/en/photo-restoration",
+          "image": "https://picsum.photos/id/1066/600/400"
+        }
+      ],
+      "view_details": "View Details"
+    },
+    "photo_editing": {
+      "title": "Photo Editing Services",
+      "subtitle": "Transform your photos with our professional editing and enhancement services",
+      "services": [
+        {
+          "title": "Background Removal",
+          "description": "Professional background removal for any photo with clean edges and perfect results"
+        },
+        {
+          "title": "Digital Makeup",
+          "description": "Professional editing to enhance your photos while maintaining a natural look"
+        },
+        {
+          "title": "Golden Ratio Adjustment",
+          "description": "Perfect facial proportions using the golden ratio for balanced and aesthetic photos"
+        },
+        {
+          "title": "Permanent Storage",
+          "description": "Your photos are safely stored permanently with easy access when you need them"
+        }
+      ]
+    },
+    "about": {
+      "title": "About Nhat Studio",
+      "content": [
+        "Hello! I'm Nhat, a professional photographer with over 10 years of experience specializing in portrait and ID photography.",
+        "My passion for photography began when I was a teenager, and I've been continuously honing my skills since then. I founded Nhat Studio with the mission to provide high-quality photography services at affordable prices.",
+        "I believe everyone deserves beautiful photos that show their best selves. Whether you need a simple ID photo or a professional portrait, I am committed to delivering excellent results.",
+        "I look forward to welcoming you to our studio and helping you create beautiful memories!"
+      ]
+    },
+    "contact": {
+      "title": "Find Us",
+      "subtitle": "Visit our studio to use our professional photography services",
+      "contact_information": "Contact Information",
+      "address": "254/9 Hoang Dieu, Da Nang, Vietnam",
+      "business_hours": {
+        "title": "Business Hours",
+        "weekday": "Monday - Saturday: 8:00 AM - 7:00 PM",
+        "weekend": "Sunday: 8:00 AM - 5:00 PM"
+      }
+    },
+    "why_choose_us": {
+      "title": "Why Choose Us",
+      "subtitle": "We are committed to delivering the best photography experience",
+      "features": [
+        {
+          "title": "Best Prices",
+          "description": "We offer the most competitive prices in the market without compromising on quality."
+        },
+        {
+          "title": "Beautiful Photos",
+          "description": "Our photographers are experts in composition, lighting, and capturing your best angles."
+        },
+        {
+          "title": "Dedicated Service",
+          "description": "Our friendly team is committed to providing personalized service and ensuring your satisfaction."
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "Customer Reviews",
+      "subtitle": "See what our customers say about their experience with us",
+      "items": [
+        {
+          "name": "Michael Nguyen",
+          "role": "Business Professional",
+          "image": "https://i.pravatar.cc/150?img=52",
+          "rating": 5,
+          "testimonial": "The team at Nhat Studio did an excellent job with my LinkedIn profile photo. Very professional and the results exceeded my expectations!"
+        },
+        {
+          "name": "Linda Tran",
+          "role": "Student",
+          "image": "https://i.pravatar.cc/150?img=31",
+          "rating": 5,
+          "testimonial": "I needed urgent passport photos for my visa application. Photos were completed in minutes and perfectly met all requirements. Excellent service!"
+        },
+        {
+          "name": "Harry Pham",
+          "role": "Family Customer",
+          "image": "https://i.pravatar.cc/150?img=58",
+          "rating": 5,
+          "testimonial": "We had our family photos taken here and they turned out beautifully. The photographer was very patient with our children and captured wonderful moments."
+        }
+      ]
+    }
+  },
+  "common": {
+    "book_now": "Book Now",
+    "navigation": {
+      "title": "Quick Links",
+      "home": "Home",
+      "services": "Services",
+      "about": "About",
+      "testimonials": "Testimonials",
+      "contact": "Contact"
+    }
+  },
+  "footer": {
+    "about": {
+      "title": "Nhat Studio",
+      "description": "Professional photography services for all your needs. Quality photos at affordable prices."
+    },
+    "services": {
+      "title": "Services",
+      "items": {
+        "id_photos": "ID Photos",
+        "portraits": "Portrait Photography",
+        "editing": "Photo Editing",
+        "restoration": "Photo Restoration",
+        "delivery": "Home Delivery"
+      }
+    },
+    "contact": {
+      "title": "Contact Us"
+    },
+    "copyright": "Copyright {year} Nhat Studio. All rights reserved."
+  },
+  "professional_profile": {
+    "hero": {
+      "title": "Professional Profile Photography",
+      "subtitle": "Make a lasting impression with high-quality professional profile photos"
+    },
+    "intro": {
+      "title": "Professional Profile Photo Service",
+      "description": "Nhat Studio provides professional profile photography services to help you make the best impression in your business and corporate environment. We understand that a professional profile photo can bring many opportunities for your career."
+    },
+    "tips": {
+      "title": "Professional Profile Photo Tips",
+      "outfit": {
+        "title": "Outfit",
+        "tips": [
+          "Choose formal business attire appropriate for your industry",
+          "Prefer neutral colors, avoid overly bright patterns",
+          "Men should wear shirts and suits; women can wear shirts or blazers"
+        ]
+      },
+      "expression": {
+        "title": "Expression",
+        "tips": [
+          "Natural, friendly smile but not too wide",
+          "Keep confident eye contact with the camera",
+          "Maintain good posture, relaxed shoulders, show confidence"
+        ]
+      }
+    },
+    "cta": {
+      "title": "Book Your Professional Profile Photo Session Today",
+      "description": "Let's Nhat Studio help you create a professional impression with high-quality profile photos. Book now for the best service!",
+      "book_now": "Book Now",
+      "contact": "Contact Us"
+    }
+
+  },
+  "id_photos": {
+    "title": "ID Photos, Passport & Visa - Nhat Studio",
+    "description": "High-quality ID photo services for all types of documents and applications in Da Nang",
+    "heading": "ID Photo Services in Da Nang",
+    "subtitle": "Instant delivery of ID photos for friends and loyal customers in Da Nang. Every photo taken and edited by Nhat carries a touch of emotion.",
+    "heading2": "ID Photo Services in Da Nang",
+    "category": "ID Photo Categories"
+
+
+  },
+  "photo_restoration": {
+    "title": "Photo Restoration",
+    "description": "Restore your precious memories with modern photo restoration technology",
+    "samples": {
+      "title": "Restoration Samples"
+    },
+    "services": {
+      "title": "Photo Restoration Services",
+      "items": [
+        {
+          "title": "Basic Restoration",
+          "description": "Repair cracks, scratches, clean stains and balance colors"
+        },
+        {
+          "title": "Advanced Restoration",
+          "description": "Recreate missing parts, restore details and improve sharpness"
+        },
+        {
+          "title": "Black & White Colorization",
+          "description": "Add natural colors to black and white photos based on historical research"
+        },
+        {
+          "title": "Severe Damage Restoration",
+          "description": "Restore torn, burned, yellowed or severely damaged photos"
+        }
+      ]
+    },
+    "process": {
+      "title": "Photo Restoration Process",
+      "steps": [
+        {
+          "title": "1. Reception and Assessment",
+          "description": "We receive your old photos, assess damage levels and plan appropriate restoration."
+        },
+        {
+          "title": "2. High Quality Scanning",
+          "description": "Your photos are scanned at high resolution to ensure all possible details are preserved."
+        },
+        {
+          "title": "3. Digital Restoration",
+          "description": "Our experts use modern technology to repair cracks, stains, and restore colors."
+        },
+        {
+          "title": "4. Review and Adjustment",
+          "description": "Results are thoroughly checked and adjusted to ensure the best quality."
+        },
+        {
+          "title": "5. Product Delivery",
+          "description": "You receive the restored photos in digital format and high-quality prints (if requested)."
+        }
+      ]
+    }
+  }
+}

@@ -9,19 +9,28 @@ type PhotoType = {
 
 interface PhotoMenuServerProps {
   photoTypes: PhotoType[]
-  activeType: string 
+  activeType: string
+  dict: { [key: string]: any };
+  lang: string
+  path: string
 }
 
-export function PhotoMenuServer({ photoTypes, activeType }: PhotoMenuServerProps) {
+export function PhotoMenuServer({ 
+  photoTypes, 
+  activeType, 
+  dict,
+  lang,
+  path 
+}: PhotoMenuServerProps) {
   return (
-    <ul role="menu" aria-label="Photo type navigation">
+    <ul role="menu" aria-label={dict.id_photos.category}>
       {photoTypes.map((type) => (
         <li 
           key={type.id} 
           role="menuitem"
         >
           <a
-            href={`?type=${type.id}`}
+            href={`/${lang}/${path}?type=${type.id}`}
             aria-current={activeType === type.id ? 'page' : undefined}
             title={`View ${type.label.toLowerCase()} photos`}
             className={cn(

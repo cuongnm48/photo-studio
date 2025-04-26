@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import { Camera, CameraIcon, ImageIcon } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
+import { getDictionary } from "@/app/[lang]/dictionaries";
+import { ValidLocale } from "@/lib/i18n/config";
 
 export const metadata: Metadata = {
   title: "Ảnh thẻ, hộ chiếu & visa - Nhật Studio",
@@ -35,22 +37,27 @@ const photoTypes = [
   { id: "4x5", label: "Ảnh thẻ 4x5", icon: <ImageIcon className="h-4 w-4" /> },
 ];
 
-export default function PhotoService({
+export default async function PhotoService({
+  params,
   searchParams,
 }: {
+  params: { lang: ValidLocale };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const activeType = (searchParams.type as string) || photoTypes[0].id;
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+
+  const { type } = await searchParams;
+  const activeType = (type as string) || photoTypes[0].id;
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <Header />
+      <Header lang={lang} />
       <section className="relative h-[300px] md:h-[400px]">
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-slate-900/60 z-10" />
         <Image
           src="https://picsum.photos/id/1005/1920/600"
-          alt="Ảnh thẻ & hộ chiếu"
+          alt={dict.id_photos.title}
           fill
           priority
           className="object-cover"
@@ -58,41 +65,40 @@ export default function PhotoService({
         />
         <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center">
           <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            Ảnh Thẻ, Hộ Chiếu & Visa
+            {dict.id_photos.title}
           </h1>
           <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl">
-            Chụp ảnh thẻ đạt chuẩn cho mọi loại giấy tờ, hồ sơ với chất lượng cao
+            {dict.id_photos.description}
           </p>
         </div>
       </section>
 
-      {/* Header Section with minimalist design */}
       <div className="container mx-auto lg:px-4">
-      <div className="relative bg-gray-100 py-16">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex items-center justify-center mb-4">
-            <CameraIcon className="h-10 w-10 mr-4 text-gray-700" />
-            <h1 className="text-3xl font-bold text-gray-900">Chụp ảnh thẻ Đà Nẵng</h1>
+        <div className="relative bg-gray-100 py-16">
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="flex items-center justify-center mb-4">
+              <CameraIcon className="h-10 w-10 mr-4 text-gray-700" />
+              <h1 className="text-3xl font-bold text-gray-900">{dict.id_photos.heading}</h1>
+            </div>
+            <p className="text-center max-w-2xl mx-auto text-gray-600">
+              {dict.id_photos.subtitle}
+            </p>
           </div>
-          <p className="text-center max-w-2xl mx-auto text-gray-600">
-            Nhận luôn sản phẩm và chụp ảnh thẻ cho các bạn, các khách hàng thân quen tại Đà Nẵng.
-            Mỗi bức ảnh Nhật chụp và chỉnh sửa đều mang một cảm xúc vào trong đó.
-          </p>
         </div>
       </div>
-      </div>
+
       {/* Immediate Photo Section */}
       <div className="container mx-auto px-4 py-12 text-center">
         <div className="inline-flex items-center justify-center bg-gray-100 text-gray-800 px-6 py-3 rounded-md mb-8">
           <Camera className="h-5 w-5 mr-2" />
-          <h2 className="text-xl font-medium">Chụp ảnh thẻ lấy ngay</h2>
+          <h2 className="text-xl font-medium">{dict.id_photos.heading2}</h2>
         </div>
       </div>
 
       {/* Photo Types Section with Left Menu */}
       <div className="container mx-auto px-4 pb-16">
         <div className="flex flex-col md:flex-row gap-8 bg-white rounded-xl shadow-xl">
-          <PhotoMenu photoTypes={photoTypes} activeType={activeType} />
+          <PhotoMenu photoTypes={photoTypes} activeType={activeType} dict={dict} lang={lang} />
           
           {/* Content Area */}
           <div className="flex-1 p-8 bg-gray-50">
@@ -127,8 +133,7 @@ export default function PhotoService({
         </div>
       </div>
 
-      {/* Footer */}
-      <Footer />
+      <Footer lang={lang} />
     </div>
   );
 }
