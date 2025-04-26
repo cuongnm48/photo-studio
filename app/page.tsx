@@ -1,23 +1,36 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import {
+  ExternalLink,
+  Facebook,
+  FacebookIcon,
+  Instagram,
+  LinkIcon,
+  Mail,
+  MapPin,
+  MessageCircle,
+  MessageSquare,
+  Phone,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import TestimonialCard from "@/components/testimonial-card";
 import PricingCard from "@/components/pricing-card";
 import ServiceCard from "@/components/service-card";
 import Banner from "@/components/banner";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 export default function Home() {
   const services = [
     {
-      title: "Ảnh Thẻ & Hộ Chiếu",
+      title: "Ảnh Thẻ, Hộ Chiếu & Visa",
       description: "Chụp ảnh thẻ đạt chuẩn cho mọi loại giấy tờ",
       image: "https://picsum.photos/id/1012/600/400",
       link: "/anh-the-ho-chieu",
     },
     {
-      title: "Ảnh Hồ Sơ Chuyên Nghiệp",
+      title: "Chụp ảnh Profile cá nhân chuyên nghiệp",
       description: "Tôn vinh vẻ đẹp tự nhiên của bạn",
       image: "https://picsum.photos/id/1027/600/400",
       link: "/anh-ho-so-chuyen-nghiep",
@@ -33,58 +46,7 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="bg-white sticky top-0 z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-full bg-rose-500 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">NS</span>
-              </div>
-              <span className="font-bold text-xl text-gray-800">Nhật Studio</span>
-            </Link>
-
-            <nav className="hidden md:flex items-center space-x-8">
-              <Link
-                href="/#services"
-                className="text-gray-600 hover:text-rose-500 transition-colors"
-              >
-                Dịch Vụ
-              </Link>
-              <Link
-                href="/#pricing"
-                className="text-gray-600 hover:text-rose-500 transition-colors"
-              >
-                Bảng Giá
-              </Link>
-              <Link href="/#about" className="text-gray-600 hover:text-rose-500 transition-colors">
-                Về Chúng Tôi
-              </Link>
-              <Link
-                href="/#testimonials"
-                className="text-gray-600 hover:text-rose-500 transition-colors"
-              >
-                Đánh Giá
-              </Link>
-              <Link
-                href="/#contact"
-                className="text-gray-600 hover:text-rose-500 transition-colors"
-              >
-                Liên Hệ
-              </Link>
-            </nav>
-
-            <div className="flex items-center space-x-4">
-              <Link href="#" className="text-gray-600 hover:text-rose-500">
-                <Facebook size={20} />
-              </Link>
-              <Link href="#" className="text-gray-600 hover:text-rose-500">
-                <Instagram size={20} />
-              </Link>
-              <Button className="hidden md:flex bg-rose-500 hover:bg-rose-600">Đặt Lịch</Button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Banner Section */}
       <Banner />
@@ -94,7 +56,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">Dịch Vụ Chụp Ảnh</h2>
-            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
               Chụp ảnh chuyên nghiệp cho mọi nhu cầu của bạn, từ ảnh thẻ đến ảnh chân dung
             </p>
           </div>
@@ -114,13 +76,18 @@ export default function Home() {
                   </Link>
                 </div>
                 <CardContent className="p-6 h-32">
-                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                  <Link
+                    href={service.link}
+                    className=" hover:text-blue-400 font-medium flex items-center gap-2"
+                  >
+                    <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                  </Link>
                   <p className="text-gray-600">{service.description}</p>
                 </CardContent>
                 <CardFooter>
                   <Link
                     href={service.link}
-                    className="text-rose-500 hover:text-rose-700 font-medium flex items-center gap-2"
+                    className=" hover:text-blue-400 font-medium flex items-center gap-2"
                   >
                     Xem chi tiết
                     <svg
@@ -181,61 +148,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Third Section - Pricing */}
-      <section id="pricing" className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900">Bảng Giá</h2>
-            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-              Giá cả minh bạch cho tất cả dịch vụ chụp ảnh của chúng tôi
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <PricingCard
-              title="Ảnh Thẻ"
-              price="15"
-              features={[
-                "4 bản in",
-                "Bản kỹ thuật số",
-                "Hoàn thành trong 5 phút",
-                "Đáp ứng yêu cầu chính thức",
-                "Bao gồm chỉnh sửa",
-              ]}
-              popular={false}
-            />
-
-            <PricingCard
-              title="Chụp Chân Dung"
-              price="49"
-              features={[
-                "Buổi chụp 30 phút",
-                "5 ảnh kỹ thuật số đã chỉnh sửa",
-                "1 ảnh in cỡ 8×10",
-                "Ánh sáng chuyên nghiệp",
-                "Nhiều tư thế khác nhau",
-              ]}
-              popular={true}
-            />
-
-            <PricingCard
-              title="Gói Hoàn Chỉnh"
-              price="99"
-              features={[
-                "Buổi chụp 1 giờ",
-                "10 ảnh kỹ thuật số đã chỉnh sửa",
-                "3 ảnh in cỡ 8×10",
-                "Nhiều phông nền khác nhau",
-                "Bao gồm giao hàng tận nơi",
-              ]}
-              popular={false}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Fourth Section - About Us */}
-      <section id="about" className="py-16 bg-gray-50">
+      <section id="testimonials" className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">Tại Sao Chọn Chúng Tôi</h2>
@@ -327,7 +240,7 @@ export default function Home() {
       </section>
 
       {/* Fifth Section - Testimonials */}
-      <section id="testimonials" className="py-16 bg-white">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">Đánh Giá Từ Khách Hàng</h2>
@@ -340,7 +253,7 @@ export default function Home() {
             <TestimonialCard
               name="Minh Nguyễn"
               role="Chuyên Gia Kinh Doanh"
-              image="https://i.pravatar.cc/100"
+              image="https://i.pravatar.cc/150?img=52"
               rating={5}
               testimonial="Đội ngũ tại Nhật Studio đã làm rất tốt với ảnh hồ sơ LinkedIn của tôi. Rất chuyên nghiệp và kết quả vượt quá mong đợi của tôi!"
             />
@@ -348,7 +261,7 @@ export default function Home() {
             <TestimonialCard
               name="Linh Trần"
               role="Sinh Viên"
-              image="https://i.pravatar.cc/100"
+              image="https://i.pravatar.cc/150?img=31"
               rating={5}
               testimonial="Tôi cần ảnh hộ chiếu gấp cho đơn xin visa. Ảnh được hoàn thành trong vài phút và đáp ứng hoàn hảo mọi yêu cầu. Dịch vụ tuyệt vời!"
             />
@@ -356,8 +269,8 @@ export default function Home() {
             <TestimonialCard
               name="Hải Phạm"
               role="Khách Hàng Gia Đình"
-              image="https://i.pravatar.cc/100"
-              rating={4}
+              image="https://i.pravatar.cc/150?img=58"
+              rating={5}
               testimonial="Chúng tôi đã chụp ảnh gia đình ở đây và ảnh rất đẹp. Nhiếp ảnh gia rất kiên nhẫn với con của chúng tôi và đã ghi lại những khoảnh khắc tuyệt vời."
             />
           </div>
@@ -365,7 +278,7 @@ export default function Home() {
       </section>
 
       {/* Google Map Section */}
-      <section id="location" className="py-16 bg-gray-50">
+      <section id="contact" className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">Tìm Chúng Tôi</h2>
@@ -374,35 +287,64 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="grid md:grid-cols-2 gap-8 items-stretch">
+            {/* Contact  */}
+            <div className="bg-white p-6 rounded-lg shadow-md flex flex-col">
               <h3 className="text-xl font-bold mb-4">Thông Tin Liên Hệ</h3>
-              <div className="space-y-4">
+              <div className="space-y-4 flex-grow">
                 <div className="flex items-start space-x-3">
                   <MapPin className="text-rose-500 mt-1 flex-shrink-0" />
                   <p>254/9 Hoàng Diệu, Đà Nẵng, Việt Nam</p>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Phone className="text-rose-500 flex-shrink-0" />
-                  <p>+84 123 456 789</p>
+                  <p>0909939351 | 0905098084</p>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Mail className="text-rose-500 flex-shrink-0" />
-                  <p>info@nhatstudio.com</p>
+                  <p>nhatstudio.0909939351@gmail.com</p>
                 </div>
-                <div>
-                  <h4 className="font-medium mb-2">Giờ Mở Cửa:</h4>
-                  <p>Thứ Hai - Thứ Sáu: 9:00 - 19:00</p>
-                  <p>Thứ Bảy: 9:00 - 17:00</p>
-                  <p>Chủ Nhật: Đóng cửa</p>
+                <div className="flex items-center space-x-3">
+                  <MessageCircle className="text-rose-500 flex-shrink-0" />
+                  <Link
+                    href="https://zalo.me/0909939351"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center hover:text-blue-300"
+                  >
+                    <p>Nhật Studio Zalo</p>
+                  </Link>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <FacebookIcon className="text-rose-500 flex-shrink-0" />
+                  <Link
+                    href="https://www.facebook.com/ChupAnhTheDaNang.NhatStudio/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center hover:text-blue-300"
+                  >
+                    <p>Chụp Ảnh Thẻ Đà Nẵng - NHẬT Studio</p>
+                  </Link>
                 </div>
               </div>
+              <div>
+                <h3 className="text-xl font-bold mt-4">Giờ mở cửa</h3>
+                <p>Thứ Hai - Thứ Bảy: 8:00 - 19:00</p>
+                <p>Chủ Nhật: 8:00 - 17:00</p>
+              </div>
             </div>
-
-            <div className="h-[400px] bg-gray-200 rounded-lg overflow-hidden">
+            {/* Address  */}
+            <div className="bg-gray-200 rounded-lg overflow-hidden flex">
               {/* This would be replaced with an actual Google Maps embed */}
-              <div className="w-full h-full flex items-center justify-center bg-gray-300">
-                <p className="text-gray-600">Bản đồ Google sẽ được nhúng ở đây</p>
+              <div className="w-full aspect-video rounded-xl overflow-hidden shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d239.63225401400408!2d108.21637842804198!3d16.059465841677223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219be4de295c1%3A0x32aa91831c5d6030!2zTkjhuqxUIFNUVURJTw!5e0!3m2!1svi!2s!4v1745597814112!5m2!1svi!2s"
+                  width="600"
+                  height="450"
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
             </div>
           </div>
@@ -410,7 +352,7 @@ export default function Home() {
       </section>
 
       {/* About Me Section */}
-      <section id="about-me" className="py-16 bg-white">
+      <section id="about" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px]">
@@ -442,130 +384,13 @@ export default function Home() {
                 Tôi mong được chào đón bạn đến studio của chúng tôi và giúp bạn tạo ra những kỷ niệm
                 đẹp!
               </p>
-              <div className="flex space-x-4">
-                <Link href="#" className="text-rose-500 hover:text-rose-600">
-                  <Facebook size={24} />
-                </Link>
-                <Link href="#" className="text-rose-500 hover:text-rose-600">
-                  <Instagram size={24} />
-                </Link>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">Nhật Studio</h3>
-              <p className="text-gray-300 mb-4">
-                Dịch vụ chụp ảnh chuyên nghiệp cho mọi nhu cầu của bạn. Ảnh chất lượng với giá cả
-                phải chăng.
-              </p>
-              <div className="flex space-x-4">
-                <Link href="#" className="text-gray-300 hover:text-white">
-                  <Facebook size={20} />
-                </Link>
-                <Link href="#" className="text-gray-300 hover:text-white">
-                  <Instagram size={20} />
-                </Link>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-bold mb-4">Dịch Vụ</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    Ảnh Thẻ
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    Chụp Ảnh Chân Dung
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    Chỉnh Sửa Ảnh
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    Phục Hồi Ảnh Cũ
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    Giao Hàng Tận Nơi
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-bold mb-4">Liên Kết Nhanh</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    Trang Chủ
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#about" className="text-gray-300 hover:text-white">
-                    Về Chúng Tôi
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#services" className="text-gray-300 hover:text-white">
-                    Dịch Vụ
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#pricing" className="text-gray-300 hover:text-white">
-                    Bảng Giá
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#testimonials" className="text-gray-300 hover:text-white">
-                    Đánh Giá
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#contact" className="text-gray-300 hover:text-white">
-                    Liên Hệ
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-bold mb-4">Liên Hệ Chúng Tôi</h3>
-              <ul className="space-y-2">
-                <li className="flex items-start space-x-3">
-                  <MapPin className="text-rose-400 mt-1 flex-shrink-0" size={18} />
-                  <span className="text-gray-300">254/9 Hoàng Diệu, Đà Nẵng, Việt Nam</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <Phone className="text-rose-400 flex-shrink-0" size={18} />
-                  <span className="text-gray-300">+84 123 456 789</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <Mail className="text-rose-400 flex-shrink-0" size={18} />
-                  <span className="text-gray-300">info@nhatstudio.com</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} Nhật Studio. Bảo lưu mọi quyền.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

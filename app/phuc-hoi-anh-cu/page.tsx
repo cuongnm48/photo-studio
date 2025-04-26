@@ -1,9 +1,10 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Header from "@/components/header"
-import { Facebook, Instagram } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import Link from "next/link";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Header from "@/components/header";
+import { Facebook, Instagram } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Footer from "@/components/footer";
 
 export default function PhucHoiAnhCu() {
   // Các mẫu ảnh phục hồi
@@ -29,7 +30,7 @@ export default function PhucHoiAnhCu() {
       afterImage: "https://picsum.photos/id/1070/600/800",
       description: "Phục hồi độ tương phản, làm sắc nét và tái tạo chi tiết bị mất",
     },
-  ]
+  ];
 
   // Các dịch vụ phục hồi
   const restorationServices = [
@@ -125,58 +126,12 @@ export default function PhucHoiAnhCu() {
         </svg>
       ),
     },
-  ]
+  ];
 
   return (
     <main className="min-h-screen">
       {/* Header */}
-      <header className="bg-white sticky top-0 z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-full bg-rose-500 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">NS</span>
-              </div>
-              <span className="font-bold text-xl text-gray-800">Nhật Studio</span>
-            </Link>
-
-            <nav className="hidden md:flex items-center space-x-8">
-              <Link
-                href="/#services"
-                className="text-gray-600 hover:text-rose-500 transition-colors"
-              >
-                Dịch Vụ
-              </Link>
-              <Link href="/#pricing" className="text-gray-600 hover:text-rose-500 transition-colors">
-                Bảng Giá
-              </Link>
-              <Link href="/#about" className="text-gray-600 hover:text-rose-500 transition-colors">
-                Về Chúng Tôi
-              </Link>
-              <Link
-                href="/#testimonials"
-                className="text-gray-600 hover:text-rose-500 transition-colors"
-              >
-                Đánh Giá
-              </Link>
-              <Link href="/#contact" className="text-gray-600 hover:text-rose-500 transition-colors">
-                Liên Hệ
-              </Link>
-            </nav>
-
-            <div className="flex items-center space-x-4">
-              <Link href="#" className="text-gray-600 hover:text-rose-500">
-                <Facebook size={20} />
-              </Link>
-              <Link href="#" className="text-gray-600 hover:text-rose-500">
-                <Instagram size={20} />
-              </Link>
-              <Button className="hidden md:flex bg-rose-500 hover:bg-rose-600">Đặt Lịch</Button>
-            </div>
-          </div>
-        </div>
-      </header>
-      
+      <Header />
 
       {/* Hero Section */}
       <section className="relative h-[300px] md:h-[400px]">
@@ -200,63 +155,11 @@ export default function PhucHoiAnhCu() {
       {/* Main Content */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center">Dịch vụ phục hồi ảnh cũ</h2>
-            <p className="text-slate-600 text-center">
-              Nhật Studio cung cấp dịch vụ phục hồi ảnh cũ chuyên nghiệp, giúp bạn khôi phục những kỷ niệm quý giá đã bị
-              hư hỏng theo thời gian. Chúng tôi sử dụng công nghệ hiện đại kết hợp với kỹ thuật thủ công tinh tế để mang
-              lại kết quả tốt nhất.
-            </p>
-          </div>
-
           {/* Before-After Samples */}
           <div className="mb-16">
             <h2 className="text-2xl font-bold mb-8 text-center">Mẫu phục hồi ảnh</h2>
 
-            <Tabs defaultValue="sample1" className="w-full">
-              <TabsList className="grid grid-cols-3 mb-8">
-                {restorationSamples.map((sample) => (
-                  <TabsTrigger key={sample.id} value={sample.id}>
-                    {sample.title}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-
-              {restorationSamples.map((sample) => (
-                <TabsContent key={sample.id} value={sample.id}>
-                  <div className="grid md:grid-cols-2 gap-8 items-center">
-                    <div className="space-y-6">
-                      <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-md">
-                        <Image src={sample.beforeImage || "/placeholder.svg"} alt="Ảnh trước khi phục hồi" fill className="object-cover" />
-                        <div className="absolute top-0 left-0 bg-amber-600 text-white px-3 py-1 rounded-br-lg font-medium">
-                          Trước
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <p className="text-slate-500 italic">Ảnh gốc trước khi phục hồi</p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-6">
-                      <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-md">
-                        <Image src={sample.afterImage || "/placeholder.svg"} alt="Ảnh sau khi phục hồi" fill className="object-cover" />
-                        <div className="absolute top-0 left-0 bg-emerald-600 text-white px-3 py-1 rounded-br-lg font-medium">
-                          Sau
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <p className="text-slate-500 italic">Ảnh sau khi phục hồi</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-8 bg-amber-50 p-6 rounded-lg">
-                    <h3 className="text-xl font-bold mb-2">{sample.title}</h3>
-                    <p className="text-slate-600">{sample.description}</p>
-                  </div>
-                </TabsContent>
-              ))}
-            </Tabs>
+          
           </div>
 
           {/* Services */}
@@ -288,7 +191,8 @@ export default function PhucHoiAnhCu() {
                   <div className="hidden md:block absolute right-0 top-0 w-4 h-4 rounded-full bg-amber-500 transform translate-x-1/2"></div>
                   <h3 className="text-xl font-bold mb-2">1. Tiếp nhận và đánh giá</h3>
                   <p className="text-slate-600">
-                    Chúng tôi tiếp nhận ảnh cũ của bạn, đánh giá mức độ hư hỏng và lên kế hoạch phục hồi phù hợp.
+                    Chúng tôi tiếp nhận ảnh cũ của bạn, đánh giá mức độ hư hỏng và lên kế hoạch phục
+                    hồi phù hợp.
                   </p>
                 </div>
                 <div className="hidden md:block"></div>
@@ -301,7 +205,8 @@ export default function PhucHoiAnhCu() {
                   <div className="hidden md:block absolute left-0 top-0 w-4 h-4 rounded-full bg-amber-500 transform -translate-x-1/2"></div>
                   <h3 className="text-xl font-bold mb-2">2. Scan ảnh chất lượng cao</h3>
                   <p className="text-slate-600">
-                    Ảnh của bạn được scan với độ phân giải cao để đảm bảo giữ lại tất cả các chi tiết có thể.
+                    Ảnh của bạn được scan với độ phân giải cao để đảm bảo giữ lại tất cả các chi
+                    tiết có thể.
                   </p>
                 </div>
               </div>
@@ -312,8 +217,8 @@ export default function PhucHoiAnhCu() {
                   <div className="hidden md:block absolute right-0 top-0 w-4 h-4 rounded-full bg-amber-500 transform translate-x-1/2"></div>
                   <h3 className="text-xl font-bold mb-2">3. Phục hồi kỹ thuật số</h3>
                   <p className="text-slate-600">
-                    Chuyên gia của chúng tôi sử dụng công nghệ hiện đại để sửa chữa các vết nứt, vết bẩn, và khôi phục
-                    màu sắc.
+                    Chuyên gia của chúng tôi sử dụng công nghệ hiện đại để sửa chữa các vết nứt, vết
+                    bẩn, và khôi phục màu sắc.
                   </p>
                 </div>
                 <div className="hidden md:block"></div>
@@ -337,14 +242,16 @@ export default function PhucHoiAnhCu() {
                   <div className="hidden md:block absolute right-0 top-0 w-4 h-4 rounded-full bg-amber-500 transform translate-x-1/2"></div>
                   <h3 className="text-xl font-bold mb-2">5. Bàn giao sản phẩm</h3>
                   <p className="text-slate-600">
-                    Bạn nhận được ảnh đã phục hồi dưới dạng file kỹ thuật số và bản in chất lượng cao (nếu yêu cầu).
+                    Bạn nhận được ảnh đã phục hồi dưới dạng file kỹ thuật số và bản in chất lượng
+                    cao (nếu yêu cầu).
                   </p>
                 </div>
               </div>
-
             </div>
           </section>
-          </div>
-          </section></main>
-  )
+        </div>
+      </section>
+      <Footer />
+    </main>
+  );
 }

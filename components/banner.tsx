@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { useIsMobile } from "@/hooks/use-mobile"
+import Link from "next/link"
+import { Phone } from "lucide-react"
 
 export default function Banner() {
   const isMobile = useIsMobile()
@@ -14,7 +16,14 @@ export default function Banner() {
   }, [])
 
   // Generate random photo IDs for consistency
-  const photoIds = [237, 433, 823, 1027, 1035, 1074]
+  const photoIds = [
+    { id: 237, image_url: "/DSC_3637a.jpg" },
+    { id: 433, image_url: "/DSC_3637a.png" },
+    { id: 823, image_url: "/DSC_3637a (1).png" },
+    { id: 1027, image_url: "https://picsum.photos/id/1027/600/800" },
+    { id: 1035, image_url: "https://picsum.photos/id/1035/600/800" },
+    { id: 1074, image_url: "https://picsum.photos/id/1074/600/800" },
+  ];
 
   if (!mounted) return null
 
@@ -44,16 +53,21 @@ export default function Banner() {
                 "Chúng tôi chuyên cung cấp dịch vụ chụp ảnh chuyên nghiệp với nhiều năm kinh nghiệm. Từ ảnh thẻ, chân dung, profile
                 đến ảnh gia đình, chúng tôi cam kết mang đến cho bạn những khoảnh khắc đẹp nhất."
               </p>
-              <button className="bg-white text-slate-900 hover:bg-white/90 transition-colors px-6 py-3 rounded-md font-medium">
-                Đặt lịch ngay
-              </button>
+       
+                <Link
+                href="tel:0909939351"
+                className="hidden md:flex bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-md items-center space-x-2 w-fit"
+              >
+                <span>Đặt lịch ngay</span>
+                <Phone size={16} />
+              </Link>
             </div>
 
             {/* Photo cards */}
             <div className={cn("grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4", "w-full max-w-md md:max-w-xl")}>
-              {photoIds.map((id, index) => (
+              {photoIds.map((photo, index) => (
                 <div
-                  key={id}
+                  key={photo.id}
                   className={cn(
                     "relative overflow-hidden rounded-lg shadow-lg",
                     "transition-all duration-300 hover:scale-105",
@@ -61,11 +75,9 @@ export default function Banner() {
                   )}
                 >
                   <Image
-                    src={`https://picsum.photos/id/${id}/300/400`}
+                    src={photo.image_url}
                     alt={`Sample photo ${index + 1}`}
                     fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 150px, 200px"
                   />
                 </div>
               ))}
