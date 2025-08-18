@@ -1,4 +1,4 @@
-import { getDictionary } from "@/app/[lang]/dictionaries";
+import { getCanonicalDomain, getDictionary, getDomainByLocale } from "@/app/[lang]/dictionaries";
 import { ValidLocale } from "@/lib/i18n/config";
 import { Metadata } from "next";
 import Footer from "@/components/footer";
@@ -8,17 +8,35 @@ import { CameraIcon, MessageCircle, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Chụp ảnh hồ sơ chuyên nghiệp - Nhật Studio",
-  description: "Dịch vụ chụp ảnh hồ sơ, profile chuyên nghiệp tại Đà Nẵng. Tạo ấn tượng với nhà tuyển dụng qua ảnh hồ sơ chất lượng cao.",
-  openGraph: {
-    title: "Chụp ảnh hồ sơ chuyên nghiệp - Nhật Studio",
-    description: "Dịch vụ chụp ảnh profile chuyên nghiệp tại Đà Nẵng",
-    type: "website",
-    locale: "vi_VN",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { lang: ValidLocale };
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+  const canonicalUrl = getCanonicalDomain(lang, "/professional-profile-photos");
 
+  return {
+    title: dict.professional_profile.intro.title,
+    description: dict.professional_profile.intro.description,
+    openGraph: {
+      title: dict.professional_profile.intro.title,
+      description: dict.professional_profile.intro.description,
+      url: canonicalUrl,
+      siteName: "Nhật Studio",
+      locale: lang === "vi" ? "vi_VN" : "en_US",
+      type: "website",
+    },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        "en-US": getCanonicalDomain("en", "/professional-profile-photos"),
+        "vi-VN": getCanonicalDomain("vi", "/anh-ho-so-chuyen-nghiep"),
+      },
+    },
+  };
+}
 const galleryImages = [
   {
     id: 1,
@@ -26,7 +44,7 @@ const galleryImages = [
     height: 1000,
     className: "col-span-2 row-span-2", // Large image
     src: "https://picsum.photos/id/1070/800/1000",
-    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Phong cách doanh nhân"
+    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Phong cách doanh nhân",
   },
   {
     id: 2,
@@ -34,7 +52,7 @@ const galleryImages = [
     height: 600,
     className: "", // Standard size
     src: "https://picsum.photos/id/1077/400/600",
-    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Nữ doanh nhân"
+    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Nữ doanh nhân",
   },
   {
     id: 3,
@@ -42,7 +60,7 @@ const galleryImages = [
     height: 600,
     className: "", // Standard size
     src: "https://picsum.photos/id/1076/400/600",
-    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Chân dung nghiêm túc"
+    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Chân dung nghiêm túc",
   },
   {
     id: 4,
@@ -50,7 +68,7 @@ const galleryImages = [
     height: 600,
     className: "", // Standard size
     src: "https://picsum.photos/id/1066/400/600",
-    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Phong cách sáng tạo"
+    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Phong cách sáng tạo",
   },
   {
     id: 5,
@@ -58,27 +76,20 @@ const galleryImages = [
     height: 600,
     className: "", // Standard size
     src: "https://picsum.photos/id/1074/400/600",
-    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Doanh nhân thành đạt"
+    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Doanh nhân thành đạt",
   },
 ];
 
-export default async function AnhHoSoChuyenNghiep({
-  params,
-}: {
-  params: { lang: ValidLocale };
-}) {
+export default async function AnhHoSoChuyenNghiep({ params }: { params: { lang: ValidLocale } }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
   return (
     <main className="min-h-screen">
       <Header lang={lang} />
-      
+
       {/* Hero Section */}
-      <section 
-        className="relative h-[300px] md:h-[400px]"
-        aria-label="Hero banner"
-      >
+      <section className="relative h-[300px] md:h-[400px]" aria-label="Hero banner">
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-slate-900/60 z-10" />
         <Image
           src="https://picsum.photos/id/1070/1920/600"
@@ -116,17 +127,17 @@ export default async function AnhHoSoChuyenNghiep({
       </section>
 
       {/* Gallery Section */}
-      <section 
-        className="container mx-auto px-4"
-        aria-label="Bộ sưu tập ảnh mẫu"
-      >
+      <section className="container mx-auto px-4" aria-label="Bộ sưu tập ảnh mẫu">
         <div className="mb-16 mt-10">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        
-              {galleryImages.map((img, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {galleryImages.map((img, index) => (
               <div
                 key={img.id}
-                className={index === 0 ? "relative aspect-[3/4] col-span-2 row-span-2 rounded-lg overflow-hidden shadow-lg" : "relative aspect-[3/4] rounded-lg overflow-hidden shadow-lg"}
+                className={
+                  index === 0
+                    ? "relative aspect-[3/4] col-span-2 row-span-2 rounded-lg overflow-hidden shadow-lg"
+                    : "relative aspect-[3/4] rounded-lg overflow-hidden shadow-lg"
+                }
                 role="gridcell"
               >
                 <Image
@@ -139,13 +150,14 @@ export default async function AnhHoSoChuyenNghiep({
                 />
               </div>
             ))}
-
-            </div>
           </div>
+        </div>
 
         {/* Tips Section */}
         <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center">{dict.professional_profile.tips.title}</h2>
+          <h2 className="text-2xl font-bold mb-8 text-center">
+            {dict.professional_profile.tips.title}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Outfit Tips */}
             <div className="bg-slate-50 p-6 rounded-lg">
@@ -301,9 +313,7 @@ export default async function AnhHoSoChuyenNghiep({
 
         {/* CTA Section */}
         <div className="bg-slate-100 p-8 rounded-xl text-center" role="complementary">
-          <h2 className="text-2xl font-bold mb-4">
-            {dict.professional_profile.cta.title}
-          </h2>
+          <h2 className="text-2xl font-bold mb-4">{dict.professional_profile.cta.title}</h2>
           <p className="text-slate-600 mb-6 max-w-2xl mx-auto">
             {dict.professional_profile.cta.description}
           </p>
@@ -315,8 +325,8 @@ export default async function AnhHoSoChuyenNghiep({
               </Button>
             </Link>
             <Link href="https://zalo.me/0909939351" target="_blank" rel="noopener noreferrer">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="border-slate-800 text-slate-800 hover:bg-slate-100 w-full sm:w-auto flex items-center gap-2"
               >
                 <MessageCircle size={16} />

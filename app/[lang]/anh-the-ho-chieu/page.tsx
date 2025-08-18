@@ -6,27 +6,46 @@ import { cn } from "@/lib/utils";
 import { Camera, CameraIcon, ImageIcon } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
-import { getDictionary } from "@/app/[lang]/dictionaries";
+import { getCanonicalDomain, getDictionary, getDomainByLocale } from "@/app/[lang]/dictionaries";
 import { ValidLocale } from "@/lib/i18n/config";
 
-export const metadata: Metadata = {
-  title: "Ảnh thẻ, hộ chiếu & visa - Nhật Studio",
-  description: "Chụp ảnh thẻ đạt chuẩn cho mọi loại giấy tờ, hồ sơ với chất lượng cao tại Đà Nẵng",
-  openGraph: {
-    title: "Ảnh thẻ, hộ chiếu & visa - Nhật Studio",
-    description: "Chụp ảnh thẻ đạt chuẩn cho mọi loại giấy tờ tại Đà Nẵng",
-    type: "website",
-    locale: "vi_VN",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { lang: ValidLocale };
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+  const canonicalUrl = getCanonicalDomain(lang, "/anh-the-ho-chieu");
+
+  return {
+    title: dict.id_photos.title,
+    description: dict.id_photos.description,
+    openGraph: {
+      title: dict.id_photos.title,
+      description: dict.id_photos.description,
+      url: canonicalUrl,
+      siteName: "Nhật Studio",
+      locale: lang === "vi" ? "vi_VN" : "en_US",
+      type: "website",
+    },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        "en-US": getCanonicalDomain("en", "/photo-restoration"),
+        "vi-VN": getCanonicalDomain("vi", "/anh-the-ho-chieu"),
+      },
+    },
+  };
+}
 
 // Define the photo types
 const photoTypes = [
-  { 
+  {
     id: "3x4",
     label: "Ảnh thẻ 3x4",
     icon: <ImageIcon className="h-4 w-4" />,
-    description: "Chuẩn cho CMND, CCCD, bằng lái xe" 
+    description: "Chuẩn cho CMND, CCCD, bằng lái xe",
   },
   { id: "4x6", label: "Ảnh thẻ 4x6", icon: <ImageIcon className="h-4 w-4" /> },
   { id: "5x5", label: "Ảnh thẻ 5x5", icon: <ImageIcon className="h-4 w-4" /> },
@@ -64,9 +83,7 @@ export default async function PhotoService({
           sizes="100vw"
         />
         <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center">
-          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            {dict.id_photos.title}
-          </h1>
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">{dict.id_photos.title}</h1>
           <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl">
             {dict.id_photos.description}
           </p>
@@ -80,9 +97,7 @@ export default async function PhotoService({
               <CameraIcon className="h-10 w-10 mr-4 text-gray-700" />
               <h1 className="text-3xl font-bold text-gray-900">{dict.id_photos.heading}</h1>
             </div>
-            <p className="text-center max-w-2xl mx-auto text-gray-600">
-              {dict.id_photos.subtitle}
-            </p>
+            <p className="text-center max-w-2xl mx-auto text-gray-600">{dict.id_photos.subtitle}</p>
           </div>
         </div>
       </div>
@@ -99,7 +114,7 @@ export default async function PhotoService({
       <div className="container mx-auto px-4 pb-16">
         <div className="flex flex-col md:flex-row gap-8 bg-white rounded-xl shadow-xl">
           <PhotoMenu photoTypes={photoTypes} activeType={activeType} dict={dict} lang={lang} />
-          
+
           {/* Content Area */}
           <div className="flex-1 p-8 bg-gray-50">
             {photoTypes.map((type) => (

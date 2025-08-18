@@ -1,54 +1,51 @@
-import { match } from '@formatjs/intl-localematcher'
-import Negotiator from 'negotiator'
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-import { locales, defaultLocale, isValidLocale } from './lib/i18n/config'
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { match as matchLocale } from "@formatjs/intl-localematcher";
+import Negotiator from "negotiator";
+import { i18n, ValidLocale } from "@/lib/i18n/config";
+import { getDomainByLocale } from "./app/[lang]/dictionaries";
 
 function getLocale(request: NextRequest): string {
-  const headers = { 'accept-language': request.headers.get('accept-language') || '' }
-  const languages = new Negotiator({ headers }).languages()
-  return match(languages, locales, defaultLocale)
+  const negotiatorHeaders: Record<string, string> = {};
+  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
+
+  const locales = i18n.locales;
+  let languages = new Negotiator({ headers: negotiatorHeaders }).languages();
+
+  return matchLocale(languages, locales, i18n.defaultLocale);
 }
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
-  
-  // Skip if the pathname should be excluded
-  if (
-    pathname.startsWith('/_next') ||
-    pathname.includes('/api/') ||
-    pathname.includes('.') ||
-    pathname.startsWith('/public')
-  ) {
-    return
+  const pathname = request.nextUrl.pathname;
+  const currentDomain = request.headers.get("host") || "";
+
+  // Check if the request is for a public file
+  if (/\.(.*)$/.test(pathname) || pathname.includes("_next") || pathname.includes("api")) {
+    return NextResponse.next();
   }
 
-  // Check for valid locale in pathname
-  const pathnameHasValidLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  )
-
-  if (pathnameHasValidLocale) {
-    const locale = pathname.split('/')[1]
-    if (!isValidLocale(locale)) {
-      // Redirect invalid locale to default
-      request.nextUrl.pathname = pathname.replace(`/${locale}`, `/${defaultLocale}`)
-      return NextResponse.redirect(request.nextUrl)
-    }
-    return
+  // Redirect based on domain and language
+  if (pathname.startsWith("/vi") && currentDomain.includes("photoboothdanang.vn")) {
+    const newUrl = new URL(pathname, process.env.NEXT_PUBLIC_VI_DOMAIN);
+    return NextResponse.redirect(newUrl);
   }
 
-  // Redirect if there is no locale
-  const locale = getLocale(request)
-  request.nextUrl.pathname = `/${locale}${pathname}`
-  return NextResponse.redirect(request.nextUrl)
+  if (pathname.startsWith("/en") && currentDomain.includes("chupanhthedanang.vn")) {
+    const newUrl = new URL(pathname, process.env.NEXT_PUBLIC_EN_DOMAIN);
+    return NextResponse.redirect(newUrl);
+  }
+
+  // Handle default language redirects
+  if (!pathname.startsWith("/vi") && !pathname.startsWith("/en")) {
+    const locale = getLocale(request);
+    return NextResponse.redirect(
+      new URL(`/${locale}${pathname}`, getDomainByLocale(locale as ValidLocale))
+    );
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    // Skip all internal paths (_next)
-    '/((?!_next|.*\\..*).*)',
-    // Include root path
-    '/'
-  ]
-}
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+};

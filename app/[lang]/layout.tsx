@@ -10,7 +10,6 @@ const inter = Inter({ subsets: ["latin", "vietnamese"] })
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const { lang } = await params;
-  const isValidLang = isValidLocale(lang) ? lang : defaultLocale
   const dict = await getDictionary(lang as ValidLocale)
 
   return {
@@ -19,7 +18,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
       default: dict.metadata.title,
     },
     description: dict.metadata.description,
-    generator: 'AI Generator',
+    generator: 'Nhật Studio',
   }
 }
 

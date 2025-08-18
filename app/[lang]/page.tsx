@@ -8,17 +8,18 @@ import { FacebookIcon, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { getDictionary } from "./dictionaries";
+import { getDictionary, getDomainByLocale } from "./dictionaries";
 import { defaultLocale, isValidLocale, ValidLocale } from "@/lib/i18n/config";
 
-export const generateMetadata = async ({
+export async function generateMetadata({
   params,
 }: {
-  params: { lang: string };
-}): Promise<Metadata> => {
+  params: { lang: ValidLocale };
+}): Promise<Metadata> {
   const { lang } = await params;
   const isValidLang = isValidLocale(lang) ? lang : defaultLocale;
   const dict = await getDictionary(isValidLang as ValidLocale);
+  const domain = getDomainByLocale(lang);
 
   return {
     title: dict.metadata.title,
@@ -26,13 +27,16 @@ export const generateMetadata = async ({
     openGraph: {
       title: dict.metadata.title,
       description: dict.metadata.description,
-      url: "https://nhatstudio.com",
+      url: domain,
       siteName: "Nhật Studio",
       locale: lang === "vi" ? "vi_VN" : "en_US",
       type: "website",
     },
+    alternates: {
+      canonical: domain,
+    },
   };
-};
+}
 
 export default async function Home({ params }: { params: { lang: string } }) {
   const { lang } = await params;
@@ -306,7 +310,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
         </div>
       </section>
 
-      <Footer lang={isValidLang}/>
+      <Footer lang={isValidLang} />
     </main>
   );
 }

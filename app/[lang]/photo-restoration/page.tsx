@@ -1,4 +1,4 @@
-import { getDictionary } from "@/app/[lang]/dictionaries";
+import { getCanonicalDomain, getDictionary, getDomainByLocale } from "@/app/[lang]/dictionaries";
 import { Metadata } from "next";
 import { ValidLocale } from "@/lib/i18n/config";
 import Header from "@/components/header";
@@ -12,6 +12,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang);
+  const canonicalUrl = getCanonicalDomain(lang, "/photo-restoration");
 
   return {
     title: dict.photo_restoration.title,
@@ -19,22 +20,22 @@ export async function generateMetadata({
     openGraph: {
       title: dict.photo_restoration.title,
       description: dict.photo_restoration.description,
-      images: [
-        {
-          url: "https://picsum.photos/id/1059/1200/630",
-          width: 1200,
-          height: 630,
-        },
-      ],
+      url: canonicalUrl,
+      siteName: "Nhật Studio",
+      locale: lang === "vi" ? "vi_VN" : "en_US",
+      type: "website",
+    },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        "en-US": getCanonicalDomain("en", "/photo-restoration"),
+        "vi-VN": getCanonicalDomain("vi", "/phuc-hoi-anh-cu"),
+      },
     },
   };
 }
 
-export default async function PhotoRestoration({
-  params
-}: {
-  params: { lang: ValidLocale };
-}) {
+export default async function PhotoRestoration({ params }: { params: { lang: ValidLocale } }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
