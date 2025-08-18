@@ -3,6 +3,7 @@ import { ValidLocale } from "@/lib/i18n/config";
 import Link from "next/link";
 import LanguageSwitcher from "./language-switcher";
 import Image from "next/image";
+import { MobileNav } from "./MobileMenu";
 
 export default async function Header({ lang }: { lang: string }) {
   const dict = await getDictionary(lang as ValidLocale);
@@ -16,9 +17,9 @@ export default async function Header({ lang }: { lang: string }) {
 
   return (
     <>
-      <header className="bg-white shadow-sm lg:sticky lg:top-0 lg:z-50">
+      <header className="bg-white shadow-sm sticky top-0 z-50">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation">
-          <div className="flex justify-between items-center py-4">
+          <div className="flex justify-between items-center py-3">
             {/* Logo */}
             <Link href={`/${lang}`} className="flex items-center space-x-2">
               <span className="text-xl font-bold text-rose-500">Nhật Studio</span>
@@ -48,6 +49,7 @@ export default async function Header({ lang }: { lang: string }) {
               >
                 {dict.common.book_now}
               </Link>
+              <MobileNav lang={lang as ValidLocale} dict={dict} />
             </div>
           </div>
         </nav>
