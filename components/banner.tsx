@@ -1,30 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cloudinaryFolders, CloudinaryImageType, cn, getImagesFromFolder } from "@/lib/utils";
 import { Phone } from "lucide-react";
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import { ValidLocale } from "@/lib/i18n/config";
-
-const photoIds = [
-  {
-    id: 4333,
-    image_url:
-      "https://res.cloudinary.com/dgsn0xio7/image/upload/f_auto,q_auto:best,w_387,h_516/v1745637914/banner-homepage/test_sr1i4y.png",
-    alt: "Ảnh chụp thẻ mẫu tại Nhật Studio",
-  },
-  {
-    id: 433,
-    image_url:
-      "https://res.cloudinary.com/dgsn0xio7/image/upload/f_auto,q_auto:best,w_387,h_516/v1745637914/banner-homepage/test_sr1i4y.png",
-  },
-  { id: 823, image_url: "/DSC_3637a (1).png" },
-  { id: 1027, image_url: "https://picsum.photos/id/1074/600/800" },
-  { id: 10227, image_url: "https://picsum.photos/id/1074/600/800" },
-  { id: 1035, image_url: "https://picsum.photos/id/1074/600/800" },
-];
+import { CloudinaryImage } from "./CloudinaryImage";
 
 export default async function Banner({ lang }: { lang: string }) {
   const dict = await getDictionary(lang as ValidLocale);
+  const backgroundCardImages = await getImagesFromFolder(cloudinaryFolders.backgroundCardImages);
 
   return (
     <section aria-label={dict.home.banner.aria_label} className="relative w-full overflow-hidden">
@@ -72,7 +56,7 @@ export default async function Banner({ lang }: { lang: string }) {
               )}
               role="grid"
             >
-              {photoIds.map((photo, index) => (
+              {backgroundCardImages.map((photo: CloudinaryImageType) => (
                 <div
                   key={photo.id}
                   className={cn(
@@ -82,12 +66,9 @@ export default async function Banner({ lang }: { lang: string }) {
                   )}
                   role="gridcell"
                 >
-                  <Image
-                    src={photo.image_url}
-                    alt={
-                      photo.alt ||
-                      dict.home.banner.photo_alt.replace("{index}", (index + 1).toString())
-                    }
+                  <CloudinaryImage
+                    src={photo.url}
+                    alt={photo.title}
                     fill
                     priority
                     quality={85}

@@ -4,12 +4,12 @@ import Header from "@/components/header";
 import ServiceCard from "@/components/service-card";
 import TestimonialCard from "@/components/testimonial-card";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { defaultLocale, isValidLocale, ValidLocale } from "@/lib/i18n/config";
 import { FacebookIcon, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getDictionary, getDomainByLocale } from "./dictionaries";
-import { defaultLocale, isValidLocale, ValidLocale } from "@/lib/i18n/config";
 
 export async function generateMetadata({
   params,
