@@ -1,7 +1,7 @@
-import { getCanonicalDomain, getDictionary } from "@/app/[lang]/dictionaries";
+import { getCanonicalDomain, getDictionary, getDomainByLocale } from "@/app/[lang]/dictionaries";
 import { CloudinaryImage } from "@/components/CloudinaryImage";
 import { Card, CardContent } from "@/components/ui/card";
-import { ValidLocale } from "@/lib/i18n/config";
+import { defaultLocale, isValidLocale, ValidLocale } from "@/lib/i18n/config";
 import {
   cloudinaryFolders,
   CloudinaryImageType,
@@ -9,7 +9,6 @@ import {
   getImagesFromFolder,
 } from "@/lib/utils";
 import { Metadata } from "next";
-import { headers } from "next/headers";
 
 export async function generateStaticParams() {
   // Định nghĩa tất cả các loại ảnh bạn hỗ trợ
@@ -25,13 +24,12 @@ export async function generateMetadata({
 }: {
   params: { lang: ValidLocale; type: string };
 }): Promise<Metadata> {
-  const { lang } = params;
-  const headersList = await headers();
-  const fullUrl = headersList.get("referer") || "";
-  const url = new URL(fullUrl);
-  const pathname = url.pathname;
-  const dict = await getDictionary(lang);
-  const canonicalUrl = getCanonicalDomain(lang, pathname);
+  const { lang, type } = await params;
+
+  const isValidLang = isValidLocale(lang) ? lang : defaultLocale;
+  const dict = await getDictionary(isValidLang as ValidLocale);
+  const pathname = `${getDomainByLocale(lang)}/${lang}/anh-the-ho-chieu/${type}`;
+  const canonicalUrl = getCanonicalDomain(lang, getAlternateUrl(lang, pathname));
 
   return {
     title: dict.id_photos.title,

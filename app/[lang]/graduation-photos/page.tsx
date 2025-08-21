@@ -1,34 +1,28 @@
 import { getCanonicalDomain, getDictionary, getDomainByLocale } from "@/app/[lang]/dictionaries";
-import { ValidLocale } from "@/lib/i18n/config";
-import { Metadata } from "next";
+import { CloudinaryImage } from "@/components/CloudinaryImage";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
-import { Button } from "@/components/ui/button";
-import { Award, Camera, CameraIcon, MessageCircle, Phone, Users } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { headers } from "next/headers";
+import { Card, CardContent } from "@/components/ui/card";
+import { ValidLocale } from "@/lib/i18n/config";
 import {
   cloudinaryFolders,
   CloudinaryImageType,
   getAlternateUrl,
   getImagesFromFolder,
 } from "@/lib/utils";
-import { CloudinaryImage } from "@/components/CloudinaryImage";
-import { Card, CardContent } from "@/components/ui/card";
+import { Camera, CameraIcon } from "lucide-react";
+import { Metadata } from "next";
+import Image from "next/image";
 
 export async function generateMetadata({
   params,
 }: {
   params: { lang: ValidLocale };
 }): Promise<Metadata> {
-  const { lang } = params;
-  const headersList = await headers();
-  const fullUrl = headersList.get("referer") || "";
-  const url = new URL(fullUrl);
-  const pathname = url.pathname;
+  const { lang } = await params;
   const dict = await getDictionary(lang);
-  const canonicalUrl = getCanonicalDomain(lang, pathname);
+  const pathname = `${getDomainByLocale(lang)}/${lang}/chup-anh-tot-nghiep`;
+  const canonicalUrl = getCanonicalDomain(lang, getAlternateUrl(lang, pathname));
 
   return {
     title: dict.graduation_photos.intro.title,

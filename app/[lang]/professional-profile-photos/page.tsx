@@ -1,33 +1,29 @@
 import { getCanonicalDomain, getDictionary, getDomainByLocale } from "@/app/[lang]/dictionaries";
-import { ValidLocale } from "@/lib/i18n/config";
-import { Metadata } from "next";
+import { CloudinaryImage } from "@/components/CloudinaryImage";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { Button } from "@/components/ui/button";
-import { CameraIcon, MessageCircle, Phone } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { headers } from "next/headers";
+import { ValidLocale } from "@/lib/i18n/config";
 import {
   cloudinaryFolders,
   CloudinaryImageType,
   getAlternateUrl,
   getImagesFromFolder,
 } from "@/lib/utils";
-import { CloudinaryImage } from "@/components/CloudinaryImage";
+import { CameraIcon, MessageCircle, Phone } from "lucide-react";
+import { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 
 export async function generateMetadata({
   params,
 }: {
   params: { lang: ValidLocale };
 }): Promise<Metadata> {
-  const { lang } = params;
-  const headersList = await headers();
-  const fullUrl = headersList.get("referer") || "";
-  const url = new URL(fullUrl);
-  const pathname = url.pathname;
+  const { lang } = await params;
   const dict = await getDictionary(lang);
-  const canonicalUrl = getCanonicalDomain(lang, pathname);
+  const pathname = `${getDomainByLocale(lang)}/${lang}/anh-ho-so-chuyen-nghiep`;
+  const canonicalUrl = getCanonicalDomain(lang, getAlternateUrl(lang, pathname));
 
   return {
     title: dict.professional_profile.intro.title,

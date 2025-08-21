@@ -1,9 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
-import { cloudinaryFolders, CloudinaryImageType, cn, getImagesFromFolder } from "@/lib/utils";
-import { Phone } from "lucide-react";
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import { ValidLocale } from "@/lib/i18n/config";
+import { cloudinaryFolders, CloudinaryImageType, cn, getImagesFromFolder } from "@/lib/utils";
+import { Phone } from "lucide-react";
+import Link from "next/link";
 import { CloudinaryImage } from "./CloudinaryImage";
 
 export default async function Banner({ lang }: { lang: string }) {

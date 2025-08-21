@@ -1,31 +1,27 @@
 import { getCanonicalDomain, getDictionary, getDomainByLocale } from "@/app/[lang]/dictionaries";
-import { Metadata } from "next";
-import { ValidLocale } from "@/lib/i18n/config";
-import Header from "@/components/header";
-import Image from "next/image";
+import { CloudinaryImage } from "@/components/CloudinaryImage";
 import Footer from "@/components/footer";
-import { headers } from "next/headers";
+import Header from "@/components/header";
+import { Card, CardContent } from "@/components/ui/card";
+import { ValidLocale } from "@/lib/i18n/config";
 import {
   cloudinaryFolders,
   CloudinaryImageType,
   getAlternateUrl,
   getImagesFromFolder,
 } from "@/lib/utils";
-import { Card, CardContent } from "@/components/ui/card";
-import { CloudinaryImage } from "@/components/CloudinaryImage";
+import { Metadata } from "next";
+import Image from "next/image";
 
 export async function generateMetadata({
   params,
 }: {
   params: { lang: ValidLocale };
 }): Promise<Metadata> {
-  const { lang } = params;
-  const headersList = await headers();
-  const fullUrl = headersList.get("referer") || "";
-  const url = new URL(fullUrl);
-  const pathname = url.pathname;
+  const { lang } = await params;
   const dict = await getDictionary(lang);
-  const canonicalUrl = getCanonicalDomain(lang, pathname);
+  const pathname = `${getDomainByLocale(lang)}/${lang}/phuc-hoi-anh-cu`;
+  const canonicalUrl = getCanonicalDomain(lang, getAlternateUrl(lang, pathname));
 
   return {
     title: dict.photo_restoration.title,
