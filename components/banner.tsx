@@ -9,20 +9,24 @@ import { CloudinaryImage } from "./CloudinaryImage";
 export default async function Banner({ lang }: { lang: string }) {
   const dict = await getDictionary(lang as ValidLocale);
   const backgroundCardImages = await getImagesFromFolder(cloudinaryFolders.backgroundCardImages);
+  const bannerHomepage = await getImagesFromFolder(cloudinaryFolders.bannerHomepage);
 
   return (
-    <section aria-label={dict.home.banner.aria_label} className="relative w-full overflow-hidden">
+    <section
+      aria-label={dict.home.banner.aria_label}
+      className="relative w-full overflow-hidden bg-gradient-to-r from-slate-900/90 to-slate-900/60"
+    >
       {/* Background with gradient overlay */}
-      <div className="md:relative w-full md:h-[600px]">
-        <div className="absolute inset-0 md:bg-gradient-to-r md:from-slate-900/90 md:to-slate-900/60 z-10" />
-        <Image
-          src="https://picsum.photos/id/1058/1920/600"
-          alt={dict.home.banner.background_alt}
-          fill
+      <div className="md:relative w-full hidden md:block z-10">
+        <div className="absolute inset-0 " />
+        <CloudinaryImage
+          src={bannerHomepage[0].url}
+          alt={bannerHomepage[0].title}
+          width={1920}
+          height={600}
           priority
-          className="object-cover"
-          sizes="100vw"
           quality={90}
+          className="object-cover"
         />
       </div>
 
@@ -52,7 +56,7 @@ export default async function Banner({ lang }: { lang: string }) {
             <div
               className={cn(
                 "grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 py-4 md:py-0",
-                "w-full max-w-md md:max-w-xl"
+                "w-full max-w-md md:max-w-xl "
               )}
               role="grid"
             >

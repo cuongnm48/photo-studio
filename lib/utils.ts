@@ -6,6 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const cloudinaryFolders = {
+  bannerHomepage: "banner-homepage",
   backgroundCardImages: "background-card-images",
   photoRestoration: "photo-restoration",
   professionalProfilePhotos: "professional-profile-photos",
