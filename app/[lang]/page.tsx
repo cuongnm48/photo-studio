@@ -10,6 +10,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getDictionary, getDomainByLocale } from "./dictionaries";
+import { cloudinaryFolders, CloudinaryImageType, getImagesFromFolder } from "@/lib/utils";
+import { CloudinaryImage } from "@/components/CloudinaryImage";
 
 export async function generateMetadata({
   params,
@@ -45,6 +47,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
 
   // Get services from dictionary
   const services = dict.home.services.items;
+  const serviceCoverPhoto = await getImagesFromFolder(cloudinaryFolders.serviceCoverPhoto);
 
   return (
     <main className="min-h-screen flex flex-col">
@@ -52,7 +55,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
       <Banner lang={isValidLang} />
 
       {/* Photography Services Section */}
-      <section id="services" className="py-16 bg-gray-50">
+      <section id={dict.common.navigation.services.link} className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">{dict.home.services.title}</h2>
@@ -61,21 +64,35 @@ export default async function Home({ params }: { params: { lang: string } }) {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
               <Card
                 key={index}
                 className="overflow-hidden border-0 shadow-lg transition-all duration-300 hover:scale-105"
               >
-                <div className="relative h-64">
+                <div className="">
                   <Link
                     href={service.link}
-                    className="text-rose-500 hover:text-rose-700 font-medium flex items-center gap-2"
+                    className="text-rose-500 hover:text-rose-700 font-medium flex items-center gap-2 aspect-[5/4]"
                   >
-                    <Image src={service.image} alt="Ảnh thẻ" fill className="object-cover" />
+                    <CloudinaryImage
+                      src={
+                        serviceCoverPhoto.find(
+                          (image: CloudinaryImageType) => image.title === service.imageUrl
+                        )?.url
+                      }
+                      alt={
+                        serviceCoverPhoto.find(
+                          (image: CloudinaryImageType) => image.title === service.imageUrl
+                        )?.title
+                      }
+                      width={600}
+                      height={500}
+                      className=" transition-transform duration-300 rounded-lg"
+                    />
                   </Link>
                 </div>
-                <CardContent className="p-6 h-32">
+                <CardContent className="py-3 md:h-[140px]">
                   <Link
                     href={service.link}
                     className="hover:text-blue-400 font-medium flex items-center gap-2"
@@ -136,7 +153,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
         </div>
       </section>
 
-      <section id="testimonials" className="py-16 bg-gray-50">
+      <section id={dict.common.navigation.testimonials.link} className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">{dict.home.why_choose_us.title}</h2>
@@ -193,7 +210,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 bg-gray-50">
+      <section id={dict.common.navigation.contact.link} className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">{dict.home.contact.title}</h2>
@@ -286,7 +303,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-16 bg-white">
+      <section id={dict.common.navigation.about_us.link} className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px]">

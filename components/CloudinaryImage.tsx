@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { CldImage } from "next-cloudinary";
 
 interface CloudinaryImageProps {
@@ -22,6 +23,7 @@ export function CloudinaryImage({
   quality = 75,
 }: CloudinaryImageProps) {
   // Ensure src has f_auto and f_webp parameters
+
   const transformedSrc = src.includes("upload/") ? src.replace("upload/", "upload/f_auto/") : src;
 
   return (
@@ -30,7 +32,7 @@ export function CloudinaryImage({
       alt={alt}
       width={width}
       height={height}
-      className={className}
+      className={cn("object-cover", className)}
       priority={priority}
       crop="fill"
       gravity="auto"

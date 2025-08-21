@@ -8,9 +8,63 @@ export function cn(...inputs: ClassValue[]) {
 export const cloudinaryFolders = {
   backgroundCardImages: "background-card-images",
   photoRestoration: "photo-restoration",
-  passportPhoto: "passport-photo",
-  // Add more folders as needed
+  professionalProfilePhotos: "professional-profile-photos",
+  graduationPhotos: "graduation-photos",
+  serviceCoverPhoto: "service-cover-photo",
+  idPassportPhoto: {
+    "3x4": "id-passport-photo/3x4",
+    "3.3x4.8": "id-passport-photo/3.3x4.8",
+    "3.5x5": "id-passport-photo/3.5x5",
+    "3.5x4.5": "id-passport-photo/3.5x4.5",
+    "3.6x4.7": "id-passport-photo/3.6x4.7",
+    "4x6": "id-passport-photo/4x6",
+    "5x5": "id-passport-photo/5x5",
+    "5x7": "id-passport-photo/5x7",
+  },
 } as const;
+
+export const photoServiceUrl = [
+  {
+    url: ["anh-ho-so-chuyen-nghiep", "professional-profile-photos"],
+    viUrl: "anh-ho-so-chuyen-nghiep",
+    enUrl: "professional-profile-photos",
+  },
+  {
+    url: ["anh-the-ho-chieu", "id-passport-photos"],
+    viUrl: "anh-the-ho-chieu",
+    enUrl: "id-passport-photos",
+  },
+  {
+    url: ["phuc-hoi-anh-cu", "photo-restoration"],
+    viUrl: "phuc-hoi-anh-cu",
+    enUrl: "photo-restoration",
+  },
+  {
+    url: ["chup-anh-tot-nghiep", "graduation-photos"],
+    viUrl: "chup-anh-tot-nghiep",
+    enUrl: "graduation-photos",
+  },
+  {
+    url: ["dich-vu", "services"],
+    viUrl: "dich-vu",
+    enUrl: "services",
+  },
+  {
+    url: ["ve-chung-toi", "about-us"],
+    viUrl: "ve-chung-toi",
+    enUrl: "about-us",
+  },
+  {
+    url: ["danh-gia", "testimonials"],
+    viUrl: "danh-gia",
+    enUrl: "testimonials",
+  },
+  {
+    url: ["lien-he", "contact"],
+    viUrl: "lien-he",
+    enUrl: "contact",
+  },
+];
 
 export type CloudinaryImageType = {
   id: string;
@@ -57,4 +111,14 @@ export async function getImagesFromFolder(folderName: string) {
     console.error("Error fetching images:", error);
     return [];
   }
+}
+
+export function getAlternateUrl(lang: string, pathname: string) {
+  const alternate = photoServiceUrl.find((item) => item.url.find((f) => pathname.includes(f)));
+  if (!alternate) return pathname;
+  const alternateUrl = alternate.url.find((f) => pathname.includes(f));
+  if (!alternateUrl) return pathname;
+  return lang === "vi"
+    ? pathname.replace("en", "vi").replace(alternateUrl, alternate.viUrl)
+    : pathname.replace("vi", "en").replace(alternateUrl, alternate.enUrl);
 }

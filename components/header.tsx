@@ -9,15 +9,27 @@ export default async function Header({ lang }: { lang: string }) {
   const dict = await getDictionary(lang as ValidLocale);
 
   const navItems = [
-    { href: `/${lang}#services`, label: dict.common.navigation.services },
-    { href: `/${lang}#about`, label: dict.common.navigation.about },
-    { href: `/${lang}#testimonials`, label: dict.common.navigation.testimonials },
-    { href: `/${lang}#contact`, label: dict.common.navigation.contact },
+    {
+      href: `/${lang}#${dict.common.navigation.services.link}`,
+      label: dict.common.navigation.services.label,
+    },
+    {
+      href: `/${lang}#${dict.common.navigation.about_us.link}`,
+      label: dict.common.navigation.about_us.label,
+    },
+    {
+      href: `/${lang}#${dict.common.navigation.testimonials.link}`,
+      label: dict.common.navigation.testimonials.label,
+    },
+    {
+      href: `/${lang}#${dict.common.navigation.contact.link}`,
+      label: dict.common.navigation.contact.label,
+    },
   ];
 
   return (
     <>
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="bg-white shadow-sm ">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation">
           <div className="flex justify-between items-center py-3">
             {/* Logo */}
@@ -49,12 +61,13 @@ export default async function Header({ lang }: { lang: string }) {
               >
                 {dict.common.book_now}
               </Link>
-              <MobileNav lang={lang as ValidLocale} dict={dict} />
             </div>
           </div>
         </nav>
       </header>
-
+      <div className="fixed bottom-4 left-4 flex flex-col space-y-3 z-50">
+        <MobileNav lang={lang as ValidLocale} dict={dict} />
+      </div>
       <div className="fixed bottom-4 right-4 flex flex-col space-y-3 z-50">
         <Link
           href="https://zalo.me/0909939351"

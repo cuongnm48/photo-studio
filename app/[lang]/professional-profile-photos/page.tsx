@@ -7,15 +7,27 @@ import { Button } from "@/components/ui/button";
 import { CameraIcon, MessageCircle, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { headers } from "next/headers";
+import {
+  cloudinaryFolders,
+  CloudinaryImageType,
+  getAlternateUrl,
+  getImagesFromFolder,
+} from "@/lib/utils";
+import { CloudinaryImage } from "@/components/CloudinaryImage";
 
 export async function generateMetadata({
   params,
 }: {
   params: { lang: ValidLocale };
 }): Promise<Metadata> {
-  const { lang } = await params;
+  const { lang } = params;
+  const headersList = await headers();
+  const fullUrl = headersList.get("referer") || "";
+  const url = new URL(fullUrl);
+  const pathname = url.pathname;
   const dict = await getDictionary(lang);
-  const canonicalUrl = getCanonicalDomain(lang, "/professional-profile-photos");
+  const canonicalUrl = getCanonicalDomain(lang, pathname);
 
   return {
     title: dict.professional_profile.intro.title,
@@ -31,58 +43,19 @@ export async function generateMetadata({
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        "en-US": getCanonicalDomain("en", "/professional-profile-photos"),
-        "vi-VN": getCanonicalDomain("vi", "/anh-ho-so-chuyen-nghiep"),
+        "en-US": getCanonicalDomain("en", getAlternateUrl("en", pathname)),
+        "vi-VN": getCanonicalDomain("vi", getAlternateUrl("vi", pathname)),
       },
     },
   };
 }
-const galleryImages = [
-  {
-    id: 1,
-    width: 800,
-    height: 1000,
-    className: "col-span-2 row-span-2", // Large image
-    src: "https://picsum.photos/id/1070/800/1000",
-    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Phong cách doanh nhân",
-  },
-  {
-    id: 2,
-    width: 400,
-    height: 600,
-    className: "", // Standard size
-    src: "https://picsum.photos/id/1077/400/600",
-    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Nữ doanh nhân",
-  },
-  {
-    id: 3,
-    width: 400,
-    height: 600,
-    className: "", // Standard size
-    src: "https://picsum.photos/id/1076/400/600",
-    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Chân dung nghiêm túc",
-  },
-  {
-    id: 4,
-    width: 400,
-    height: 600,
-    className: "", // Standard size
-    src: "https://picsum.photos/id/1066/400/600",
-    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Phong cách sáng tạo",
-  },
-  {
-    id: 5,
-    width: 400,
-    height: 600,
-    className: "", // Standard size
-    src: "https://picsum.photos/id/1074/400/600",
-    alt: "Mẫu ảnh hồ sơ chuyên nghiệp - Doanh nhân thành đạt",
-  },
-];
 
 export default async function AnhHoSoChuyenNghiep({ params }: { params: { lang: ValidLocale } }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
+  const professionalProfilePhoto = await getImagesFromFolder(
+    cloudinaryFolders.professionalProfilePhotos
+  );
 
   return (
     <main className="min-h-screen">
@@ -129,10 +102,10 @@ export default async function AnhHoSoChuyenNghiep({ params }: { params: { lang: 
       {/* Gallery Section */}
       <section className="container mx-auto px-4" aria-label="Bộ sưu tập ảnh mẫu">
         <div className="mb-16 mt-10">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {galleryImages.map((img, index) => (
+          {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {professionalProfilePhoto.map((image: CloudinaryImageType, index: number) => (
               <div
-                key={img.id}
+                key={image.id}
                 className={
                   index === 0
                     ? "relative aspect-[3/4] col-span-2 row-span-2 rounded-lg overflow-hidden shadow-lg"
@@ -140,13 +113,28 @@ export default async function AnhHoSoChuyenNghiep({ params }: { params: { lang: 
                 }
                 role="gridcell"
               >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  className="object-cover"
-                  quality={85}
-                  priority={img.id === 1} // Priority load for hero image
+                <CloudinaryImage
+                  src={image.url}
+                  alt={`${image.title} mẫu ${index + 1}`}
+                  width={image.width}
+                  height={image.height}
+                  className=" transition-transform duration-300 rounded-t-lg"
+                  priority={index === 0}
+                />
+              </div>
+            ))}
+          </div> */}
+
+          <div className="grid grid-cols-1 md:block md:columns-3 gap-3">
+            {professionalProfilePhoto.map((image: CloudinaryImageType, index: number) => (
+              <div key={image.id} className="break-inside-avoid mb-4">
+                <CloudinaryImage
+                  src={image.url}
+                  alt={`${image.title} mẫu ${index + 1}`}
+                  width={image.width}
+                  height={image.height}
+                  className=" transition-transform duration-300 rounded-lg"
+                  priority={index === 0}
                 />
               </div>
             ))}

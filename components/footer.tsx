@@ -9,18 +9,49 @@ export default async function Footer({ lang }: { lang: string }) {
 
   const footerLinks = {
     services: [
-      { href: "/anh-the-ho-chieu", key: "id_photos" },
-      { href: "/anh-ho-so-chuyen-nghiep", key: "portraits" },
-      { href: "#", key: "editing" },
-      { href: "#", key: "restoration" },
-      { href: "#", key: "delivery" },
+      {
+        href: dict.home.services.items[0].link,
+        key: "id_photos",
+        label: dict.home.services.items[0].title,
+      },
+      {
+        href: dict.home.services.items[1].link,
+        key: "portraits",
+        label: dict.home.services.items[1].title,
+      },
+      {
+        href: dict.home.services.items[2].link,
+        key: "graduation",
+        label: dict.home.services.items[2].title,
+      },
+      {
+        href: dict.home.services.items[3].link,
+        key: "restoration",
+        label: dict.home.services.items[3].title,
+      },
     ],
     quickLinks: [
-      { href: "/", key: "home" },
-      { href: `/${lang}#about`, key: `about` },
-      { href: `/${lang}#services`, key: `services` },
-      { href: `/${lang}#testimonials`, key: `testimonials` },
-      { href: `/${lang}#contact`, key: `contact` },
+      { href: "/", key: "home", label: dict.common.navigation.home },
+      {
+        href: `/${lang}#${dict.common.navigation.about_us.link}`,
+        key: `about_us`,
+        label: dict.common.navigation.about_us.label,
+      },
+      {
+        href: `/${lang}#${dict.common.navigation.services.link}`,
+        key: `services`,
+        label: dict.common.navigation.services.label,
+      },
+      {
+        href: `/${lang}#${dict.common.navigation.testimonials.link}`,
+        key: `testimonials`,
+        label: dict.common.navigation.testimonials.label,
+      },
+      {
+        href: `/${lang}#${dict.common.navigation.contact.link}`,
+        key: `contact`,
+        label: dict.common.navigation.contact.label,
+      },
     ],
   };
   return (
@@ -40,7 +71,7 @@ export default async function Footer({ lang }: { lang: string }) {
               {footerLinks.services.map((link) => (
                 <li key={link.key}>
                   <Link href={link.href} className="text-gray-300 hover:text-white">
-                    {dict.footer.services.items[link.key as keyof typeof dict.footer.services.items]}
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -54,7 +85,7 @@ export default async function Footer({ lang }: { lang: string }) {
               {footerLinks.quickLinks.map((link) => (
                 <li key={link.key}>
                   <Link href={link.href} className="text-gray-300 hover:text-white">
-                    {dict.common.navigation[link.key as keyof typeof dict.common.navigation]}
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -67,8 +98,8 @@ export default async function Footer({ lang }: { lang: string }) {
             <ul className="space-y-2">
               <li className="flex items-start space-x-3">
                 <MapPin className="text-rose-400 mt-1 flex-shrink-0" size={18} />
-                <a 
-                  href="https://maps.google.com/?q=254/9+Hoàng+Diệu,+Đà+Nẵng" 
+                <a
+                  href="https://maps.google.com/?q=254/9+Hoàng+Diệu,+Đà+Nẵng"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-white"
@@ -79,7 +110,7 @@ export default async function Footer({ lang }: { lang: string }) {
               <li className="flex items-center space-x-3">
                 <Phone className="text-rose-400 flex-shrink-0" size={18} />
                 <a href="tel:0909939351" className="text-gray-300 hover:text-white">
-                  0909939351 
+                  0909939351
                 </a>
                 <span>{" | "}</span>
                 <a href="tel:0905098084" className="text-gray-300 hover:text-white">
@@ -88,7 +119,7 @@ export default async function Footer({ lang }: { lang: string }) {
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="text-rose-400 flex-shrink-0" size={18} />
-                <a 
+                <a
                   href="mailto:nhatstudio.0909939351@gmail.com"
                   className="text-gray-300 hover:text-white"
                 >
@@ -100,7 +131,7 @@ export default async function Footer({ lang }: { lang: string }) {
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>{dict.footer.copyright.replace('{year}', currentYear.toString())}</p>
+          <p>{dict.footer.copyright.replace("{year}", currentYear.toString())}</p>
         </div>
       </div>
     </footer>

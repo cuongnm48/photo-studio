@@ -1,32 +1,32 @@
-"use client"
+"use client";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { locales } from "@/lib/i18n/config"
-import { usePathname, useRouter } from "next/navigation"
-import { Globe } from "lucide-react"
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { locales } from "@/lib/i18n/config";
+import { usePathname, useRouter } from "next/navigation";
+import { Globe } from "lucide-react";
+import { getAlternateUrl } from "@/lib/utils";
 
 const languageNames: Record<string, string> = {
   en: "English",
-  vi: "Tiếng Việt"
-}
+  vi: "Tiếng Việt",
+};
 
 export default function LanguageSwitcher() {
-  const router = useRouter()
-  const pathname = usePathname()
+  const router = useRouter();
+  const pathname = usePathname();
 
   const switchLanguage = (newLocale: string) => {
-    const segments = pathname.split('/')
-    segments[1] = newLocale
-    router.push(segments.join('/'))
-  }
+    const segments = getAlternateUrl(newLocale, pathname);
+    router.push(segments);
+  };
 
-  const currentLocale = pathname.split('/')[1]
+  const currentLocale = pathname.split("/")[1];
 
   return (
     <DropdownMenu>
@@ -48,5 +48,5 @@ export default function LanguageSwitcher() {
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

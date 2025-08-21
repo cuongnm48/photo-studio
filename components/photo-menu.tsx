@@ -6,7 +6,6 @@ import { useRouter, usePathname } from "next/navigation";
 import { useState, useCallback } from "react";
 import { PhotoMenuServer } from "./PhotoMenuServer";
 
-
 interface PhotoType {
   id: string;
   label: string;
@@ -24,7 +23,7 @@ export function PhotoMenu({ photoTypes, activeType, dict, lang }: PhotoMenuProps
   const [isExpanded, setIsExpanded] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const path = pathname.split('/').pop() || ''; // Gets the last segment of the path
+  const path = pathname.split("/").at(-2) || ""; // Gets the last segment of the path
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLElement>, typeId: string) => {
@@ -53,14 +52,16 @@ export function PhotoMenu({ photoTypes, activeType, dict, lang }: PhotoMenuProps
 
   return (
     <div className="sticky top-2 z-40">
-      <div className="bg-gradient-to-b from-gray-50 to-gray-100 p-2 rounded-lg shadow-sm">
+      <div className="md:sticky md:top-2  md:z-40  bg-gradient-to-b from-gray-50 to-gray-100 p-2 rounded-lg shadow-sm">
         <button
           className="flex justify-between items-center w-full lg:w-72 lg:mb-4"
           onClick={toggleExpand}
           aria-expanded={isExpanded}
           aria-controls="photo-menu-nav"
         >
-          <h3 className="text-lg font-semibold text-gray-800">{dict.id_photos.category}</h3>
+          <h3 className="text-base md:text-xl  font-semibold text-gray-800">
+            {dict.id_photos.category}
+          </h3>
           <span className="md:hidden">
             {isExpanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
           </span>
@@ -79,9 +80,9 @@ export function PhotoMenu({ photoTypes, activeType, dict, lang }: PhotoMenuProps
           )}
           onClick={handleNavClick}
         >
-          <PhotoMenuServer 
-            photoTypes={photoTypes} 
-            activeType={activeType} 
+          <PhotoMenuServer
+            photoTypes={photoTypes}
+            activeType={activeType}
             dict={dict}
             lang={lang}
             path={path}

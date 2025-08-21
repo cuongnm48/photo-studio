@@ -61,7 +61,7 @@ export default async function Banner({ lang }: { lang: string }) {
                   key={photo.id}
                   className={cn(
                     "relative overflow-hidden rounded-lg shadow-lg",
-                    "transition-all duration-300 hover:scale-105",
+                    "transition-all duration-300",
                     "aspect-[3/4]"
                   )}
                   role="gridcell"

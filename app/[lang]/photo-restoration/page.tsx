@@ -4,15 +4,28 @@ import { ValidLocale } from "@/lib/i18n/config";
 import Header from "@/components/header";
 import Image from "next/image";
 import Footer from "@/components/footer";
+import { headers } from "next/headers";
+import {
+  cloudinaryFolders,
+  CloudinaryImageType,
+  getAlternateUrl,
+  getImagesFromFolder,
+} from "@/lib/utils";
+import { Card, CardContent } from "@/components/ui/card";
+import { CloudinaryImage } from "@/components/CloudinaryImage";
 
 export async function generateMetadata({
   params,
 }: {
   params: { lang: ValidLocale };
 }): Promise<Metadata> {
-  const { lang } = await params;
+  const { lang } = params;
+  const headersList = await headers();
+  const fullUrl = headersList.get("referer") || "";
+  const url = new URL(fullUrl);
+  const pathname = url.pathname;
   const dict = await getDictionary(lang);
-  const canonicalUrl = getCanonicalDomain(lang, "/photo-restoration");
+  const canonicalUrl = getCanonicalDomain(lang, pathname);
 
   return {
     title: dict.photo_restoration.title,
@@ -28,8 +41,8 @@ export async function generateMetadata({
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        "en-US": getCanonicalDomain("en", "/photo-restoration"),
-        "vi-VN": getCanonicalDomain("vi", "/phuc-hoi-anh-cu"),
+        "en-US": getCanonicalDomain("en", getAlternateUrl("en", pathname)),
+        "vi-VN": getCanonicalDomain("vi", getAlternateUrl("vi", pathname)),
       },
     },
   };
@@ -38,6 +51,7 @@ export async function generateMetadata({
 export default async function PhotoRestoration({ params }: { params: { lang: ValidLocale } }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
+  const photoRestoration = await getImagesFromFolder(cloudinaryFolders.photoRestoration);
 
   return (
     <main className="min-h-screen">
@@ -69,6 +83,27 @@ export default async function PhotoRestoration({ params }: { params: { lang: Val
             <h2 className="text-2xl font-bold mb-8 text-center">
               {dict.photo_restoration.samples.title}
             </h2>
+          </div>
+          <div className="mb-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+            {photoRestoration.map((image: CloudinaryImageType, index: number) => {
+              return (
+                <Card
+                  key={image.id}
+                  className="overflow-hidden transition-all hover:shadow-lg group rounded-lg"
+                >
+                  <CardContent className="p-0">
+                    <CloudinaryImage
+                      src={image.url}
+                      alt={`${image.title} mẫu ${index + 1}`}
+                      width={image.width}
+                      height={image.height}
+                      className=" transition-transform duration-300 rounded-lg"
+                      priority={index === 0}
+                    />
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
 
           <div className="mb-16 bg-slate-50 py-12 px-4 rounded-xl">
