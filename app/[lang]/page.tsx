@@ -21,7 +21,7 @@ export async function generateMetadata({
   const isValidLang = isValidLocale(lang) ? lang : defaultLocale;
   const dict = await getDictionary(isValidLang as ValidLocale);
   const domain = getDomainByLocale(lang);
-
+  const bannerHomepage = await getImagesFromFolder(cloudinaryFolders.bannerHomepage);
   return {
     title: dict.metadata.title,
     description: dict.metadata.description,
@@ -32,9 +32,27 @@ export async function generateMetadata({
       siteName: "Nhật Studio",
       locale: lang === "vi" ? "vi_VN" : "en_US",
       type: "website",
+      images: [
+        {
+          url: bannerHomepage[0].url, // ảnh bạn muốn hiển thị
+          width: 1920,
+          height: 600,
+          alt: dict.metadata.title,
+        },
+      ],
     },
     alternates: {
       canonical: domain,
+      languages: {
+        "en-US": getDomainByLocale("en"),
+        "vi-VN": getDomainByLocale("vi"),
+      },
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.metadata.title,
+      description: dict.metadata.description,
+      images: [bannerHomepage[0].url],
     },
   };
 }

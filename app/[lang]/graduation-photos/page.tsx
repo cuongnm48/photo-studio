@@ -22,7 +22,8 @@ export async function generateMetadata({
   const { lang } = await params;
   const dict = await getDictionary(lang);
   const pathname = `${getDomainByLocale(lang)}/${lang}/chup-anh-tot-nghiep`;
-  const canonicalUrl = getCanonicalDomain(lang, getAlternateUrl(lang, pathname));
+  const canonicalUrl = getAlternateUrl(lang, pathname);
+  const serviceCoverPhoto = await getImagesFromFolder(cloudinaryFolders.serviceCoverPhoto);
 
   return {
     title: dict.graduation_photos.intro.title,
@@ -34,13 +35,33 @@ export async function generateMetadata({
       siteName: "Nhật Studio",
       locale: lang === "vi" ? "vi_VN" : "en_US",
       type: "website",
+      images: [
+        {
+          url: serviceCoverPhoto.find((f: CloudinaryImageType) => f.title === "graduation").url, // ảnh bạn muốn hiển thị
+          width: 1200,
+          height: 630,
+          alt: dict.graduation_photos.intro.title,
+        },
+      ],
     },
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        "en-US": getCanonicalDomain("en", getAlternateUrl("en", pathname)),
-        "vi-VN": getCanonicalDomain("vi", getAlternateUrl("vi", pathname)),
+        "en-US": getAlternateUrl("en", pathname).replace(
+          getDomainByLocale(lang) ?? "",
+          getDomainByLocale("en") ?? ""
+        ),
+        "vi-VN": getAlternateUrl("vi", pathname).replace(
+          getDomainByLocale(lang) ?? "",
+          getDomainByLocale("vi") ?? ""
+        ),
       },
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.graduation_photos.intro.title,
+      description: dict.graduation_photos.intro.description,
+      images: [serviceCoverPhoto.find((f: CloudinaryImageType) => f.title === "graduation").url],
     },
   };
 }

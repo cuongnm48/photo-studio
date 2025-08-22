@@ -23,7 +23,8 @@ export async function generateMetadata({
   const { lang } = await params;
   const dict = await getDictionary(lang);
   const pathname = `${getDomainByLocale(lang)}/${lang}/anh-ho-so-chuyen-nghiep`;
-  const canonicalUrl = getCanonicalDomain(lang, getAlternateUrl(lang, pathname));
+  const canonicalUrl = getAlternateUrl(lang, pathname);
+  const serviceCoverPhoto = await getImagesFromFolder(cloudinaryFolders.serviceCoverPhoto);
 
   return {
     title: dict.professional_profile.intro.title,
@@ -35,13 +36,33 @@ export async function generateMetadata({
       siteName: "Nhật Studio",
       locale: lang === "vi" ? "vi_VN" : "en_US",
       type: "website",
+      images: [
+        {
+          url: serviceCoverPhoto.find((f: CloudinaryImageType) => f.title === "profile").url, // ảnh bạn muốn hiển thị
+          width: 1200,
+          height: 630,
+          alt: dict.professional_profile.intro.title,
+        },
+      ],
     },
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        "en-US": getCanonicalDomain("en", getAlternateUrl("en", pathname)),
-        "vi-VN": getCanonicalDomain("vi", getAlternateUrl("vi", pathname)),
+        "en-US": getAlternateUrl("en", pathname).replace(
+          getDomainByLocale(lang) ?? "",
+          getDomainByLocale("en") ?? ""
+        ),
+        "vi-VN": getAlternateUrl("vi", pathname).replace(
+          getDomainByLocale(lang) ?? "",
+          getDomainByLocale("vi") ?? ""
+        ),
       },
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.professional_profile.intro.title,
+      description: dict.professional_profile.intro.description,
+      images: [serviceCoverPhoto.find((f: CloudinaryImageType) => f.title === "profile").url],
     },
   };
 }

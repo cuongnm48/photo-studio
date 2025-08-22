@@ -21,7 +21,8 @@ export async function generateMetadata({
   const { lang } = await params;
   const dict = await getDictionary(lang);
   const pathname = `${getDomainByLocale(lang)}/${lang}/phuc-hoi-anh-cu`;
-  const canonicalUrl = getCanonicalDomain(lang, getAlternateUrl(lang, pathname));
+  const canonicalUrl = getAlternateUrl(lang, pathname);
+  const serviceCoverPhoto = await getImagesFromFolder(cloudinaryFolders.serviceCoverPhoto);
 
   return {
     title: dict.photo_restoration.title,
@@ -33,13 +34,33 @@ export async function generateMetadata({
       siteName: "Nhật Studio",
       locale: lang === "vi" ? "vi_VN" : "en_US",
       type: "website",
+      images: [
+        {
+          url: serviceCoverPhoto.find((f: CloudinaryImageType) => f.title === "recovery").url, // ảnh bạn muốn hiển thị
+          width: 1200,
+          height: 630,
+          alt: dict.photo_restoration.title,
+        },
+      ],
     },
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        "en-US": getCanonicalDomain("en", getAlternateUrl("en", pathname)),
-        "vi-VN": getCanonicalDomain("vi", getAlternateUrl("vi", pathname)),
+        "en-US": getAlternateUrl("en", pathname).replace(
+          getDomainByLocale(lang) ?? "",
+          getDomainByLocale("en") ?? ""
+        ),
+        "vi-VN": getAlternateUrl("vi", pathname).replace(
+          getDomainByLocale(lang) ?? "",
+          getDomainByLocale("vi") ?? ""
+        ),
       },
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.photo_restoration.title,
+      description: dict.photo_restoration.description,
+      images: [serviceCoverPhoto.find((f: CloudinaryImageType) => f.title === "recovery").url],
     },
   };
 }
