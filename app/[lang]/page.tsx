@@ -307,11 +307,20 @@ export default async function Home({ params }: { params: { lang: string } }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px]">
-              <Image
-                src="https://picsum.photos/500"
-                alt="Nhiếp ảnh gia chuyên nghiệp"
-                fill
-                className="object-cover rounded-lg"
+              <CloudinaryImage
+                src={
+                  serviceCoverPhoto.find(
+                    (image: CloudinaryImageType) => image.title === "nhat_avatar"
+                  )?.url
+                }
+                alt={
+                  serviceCoverPhoto.find(
+                    (image: CloudinaryImageType) => image.title === "nhat_avatar"
+                  )?.title
+                }
+                width={600}
+                height={500}
+                className=" transition-transform duration-300 rounded-lg"
               />
             </div>
 
