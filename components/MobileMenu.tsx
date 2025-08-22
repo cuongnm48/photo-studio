@@ -1,29 +1,27 @@
 import {
   Sheet,
-  SheetContent,
-  SheetTrigger,
   SheetClose,
+  SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetDescription,
+  SheetTrigger,
 } from "@/components/ui/sheet";
+import { ValidLocale } from "@/lib/i18n/config";
+import { cloudinaryFolders, CloudinaryImageType, getImagesFromFolder } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import Link from "next/link";
-import { ValidLocale } from "@/lib/i18n/config";
+import { CloudinaryImage } from "./CloudinaryImage";
 import { Button } from "./ui/button";
 
 interface MobileNavProps {
   lang: ValidLocale;
   dict: any;
+  navItems: Array<{ href: string; label: string }>;
 }
 
-export function MobileNav({ lang, dict }: MobileNavProps) {
-  const navItems = [
-    { href: `/${lang}#services`, label: dict.common.navigation.services },
-    { href: `/${lang}#about`, label: dict.common.navigation.about },
-    { href: `/${lang}#testimonials`, label: dict.common.navigation.testimonials },
-    { href: `/${lang}#contact`, label: dict.common.navigation.contact },
-  ];
+export async function MobileNav({ lang, dict, navItems }: MobileNavProps) {
+  const serviceCoverPhoto = await getImagesFromFolder(cloudinaryFolders.serviceCoverPhoto);
 
   return (
     <Sheet>
@@ -36,7 +34,18 @@ export function MobileNav({ lang, dict }: MobileNavProps) {
       <SheetContent side="left" className="w-[300px] sm:w-[400px]">
         <SheetHeader>
           <SheetTitle className="text-left">
-            <span className="text-xl font-bold text-rose-500">Nhật Studio</span>
+            <CloudinaryImage
+              src={
+                serviceCoverPhoto.find((image: CloudinaryImageType) => image.title === "logo")?.url
+              }
+              alt={
+                serviceCoverPhoto.find((image: CloudinaryImageType) => image.title === "logo")
+                  ?.title
+              }
+              width={150}
+              height={50}
+              className=" transition-transform duration-300 rounded-lg"
+            />
           </SheetTitle>
           <SheetDescription></SheetDescription>
         </SheetHeader>

@@ -48,6 +48,9 @@
       "subtitle": "Transform your photos with our professional editing and enhancement services",
       "services": [
         {
+          "title": "Online Photo Editing and Printing"
+        },
+        {
           "title": "Background Removal",
           "description": "Professional background removal for any photo with clean edges and perfect results"
         },

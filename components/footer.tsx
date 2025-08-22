@@ -1,8 +1,9 @@
-import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import { ValidLocale } from "@/lib/i18n/config";
-import Image from "next/image";
+import { cloudinaryFolders, CloudinaryImageType, getImagesFromFolder } from "@/lib/utils";
+import { Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
+import { CloudinaryImage } from "./CloudinaryImage";
 
 export default async function Footer({ lang }: { lang: string }) {
   const dict = await getDictionary(lang as ValidLocale);
@@ -55,19 +56,26 @@ export default async function Footer({ lang }: { lang: string }) {
       },
     ],
   };
+
+  const serviceCoverPhoto = await getImagesFromFolder(cloudinaryFolders.serviceCoverPhoto);
+
   return (
     <footer id="contact" className="bg-gray-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           {/* About Section */}
           <div>
-            <Image
-              src="/logo.jpg"
-              alt="Nhật Studio Logo"
-              width={100}
-              height={100}
-              className="rounded-full"
-              priority
+            <CloudinaryImage
+              src={
+                serviceCoverPhoto.find((image: CloudinaryImageType) => image.title === "logo")?.url
+              }
+              alt={
+                serviceCoverPhoto.find((image: CloudinaryImageType) => image.title === "logo")
+                  ?.title
+              }
+              width={150}
+              height={150}
+              className=" transition-transform duration-300 rounded-lg"
             />
             <h3 className="text-xl font-bold my-4">{dict.footer.about.title}</h3>
             <p className="text-gray-300 mb-4">{dict.footer.about.description}</p>

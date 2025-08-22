@@ -1,17 +1,16 @@
 import Banner from "@/components/banner";
+import { CloudinaryImage } from "@/components/CloudinaryImage";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import ServiceCard from "@/components/service-card";
 import TestimonialCard from "@/components/testimonial-card";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { defaultLocale, isValidLocale, ValidLocale } from "@/lib/i18n/config";
+import { cloudinaryFolders, CloudinaryImageType, getImagesFromFolder } from "@/lib/utils";
 import { FacebookIcon, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { getDictionary, getDomainByLocale } from "./dictionaries";
-import { cloudinaryFolders, CloudinaryImageType, getImagesFromFolder } from "@/lib/utils";
-import { CloudinaryImage } from "@/components/CloudinaryImage";
 
 export async function generateMetadata({
   params,
@@ -140,13 +139,20 @@ export default async function Home({ params }: { params: { lang: string } }) {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
             {dict.home.photo_editing.services.map((service, index) => (
               <ServiceCard
                 key={index}
                 icon={getServiceIcon(index)} // Create a helper function for icons
                 title={service.title}
                 description={service.description}
+                url={
+                  index === 0
+                    ? serviceCoverPhoto.find(
+                        (image: CloudinaryImageType) => image.title === "zalo_code"
+                      )?.url
+                    : ""
+                }
               />
             ))}
           </div>

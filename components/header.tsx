@@ -1,8 +1,10 @@
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import { ValidLocale } from "@/lib/i18n/config";
-import Link from "next/link";
-import LanguageSwitcher from "./language-switcher";
+import { cloudinaryFolders, CloudinaryImageType, getImagesFromFolder } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
+import { CloudinaryImage } from "./CloudinaryImage";
+import LanguageSwitcher from "./language-switcher";
 import { MobileNav } from "./MobileMenu";
 
 export default async function Header({ lang }: { lang: string }) {
@@ -27,6 +29,8 @@ export default async function Header({ lang }: { lang: string }) {
     },
   ];
 
+  const serviceCoverPhoto = await getImagesFromFolder(cloudinaryFolders.serviceCoverPhoto);
+
   return (
     <>
       <header className="bg-white shadow-sm ">
@@ -34,7 +38,19 @@ export default async function Header({ lang }: { lang: string }) {
           <div className="flex justify-between items-center py-3">
             {/* Logo */}
             <Link href={`/${lang}`} className="flex items-center space-x-2">
-              <span className="text-xl font-bold text-rose-500">Nhật Studio</span>
+              <CloudinaryImage
+                src={
+                  serviceCoverPhoto.find((image: CloudinaryImageType) => image.title === "logo")
+                    ?.url
+                }
+                alt={
+                  serviceCoverPhoto.find((image: CloudinaryImageType) => image.title === "logo")
+                    ?.title
+                }
+                width={150}
+                height={50}
+                className=" transition-transform duration-300 rounded-lg"
+              />
             </Link>
 
             {/* Navigation Links */}
@@ -66,7 +82,7 @@ export default async function Header({ lang }: { lang: string }) {
         </nav>
       </header>
       <div className="fixed bottom-4 left-4 flex flex-col space-y-3 z-50">
-        <MobileNav lang={lang as ValidLocale} dict={dict} />
+        <MobileNav lang={lang as ValidLocale} dict={dict} navItems={navItems} />
       </div>
       <div className="fixed bottom-4 right-4 flex flex-col space-y-3 z-50">
         <Link
