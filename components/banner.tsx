@@ -72,9 +72,9 @@ export default async function Banner({ lang }: { lang: string }) {
                   <CloudinaryImage
                     src={photo.url}
                     alt={photo.title}
-                    width={600}
-                    height={800}
-                    priority
+                    width={300}
+                    height={400}
+                    priority={true}
                     quality={90}
                     className="object-cover"
                   />
