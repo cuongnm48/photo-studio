@@ -11,6 +11,7 @@ interface CloudinaryImageProps {
   className?: string;
   priority?: boolean;
   quality?: number;
+  fetchPriority?: "high" | "low" | "auto";
 }
 
 export function CloudinaryImage({
@@ -20,15 +21,14 @@ export function CloudinaryImage({
   height = 800,
   className,
   priority,
-  quality = 75,
+  quality = 100,
+  fetchPriority,
 }: CloudinaryImageProps) {
   // Ensure src has f_auto and f_webp parameters
 
-  const transformedSrc = src.includes("upload/") ? src.replace("upload/", "upload/f_auto/") : src;
-
   return (
     <CldImage
-      src={transformedSrc}
+      src={src}
       alt={alt}
       width={width}
       height={height}
@@ -39,8 +39,8 @@ export function CloudinaryImage({
       dpr="auto"
       format="webp"
       quality={quality}
-      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       loading={priority ? "eager" : "lazy"}
+      fetchPriority={fetchPriority}
     />
   );
 }

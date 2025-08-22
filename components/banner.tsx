@@ -75,8 +75,8 @@ export default async function Banner({ lang }: { lang: string }) {
                     width={300}
                     height={400}
                     priority={true}
-                    quality={90}
                     className="object-cover"
+                    fetchPriority="high"
                   />
                 </div>
               ))}

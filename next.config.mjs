@@ -7,7 +7,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    domains: ["i.pravatar.cc", "picsum.photos"],
   },
   async rewrites() {
     return [
