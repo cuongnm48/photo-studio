@@ -35,10 +35,10 @@ export default async function Banner({ lang }: { lang: string }) {
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             {/* Text content */}
             <div className="hidden md:block text-center md:text-left md:max-w-xl">
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+              <h1 className="text-4xl md:text-6xl font-bold text-black/90 mb-4 tracking-tight">
                 {dict.home.banner.title}
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 mb-8 italic">
+              <p className="text-xl md:text-2xl text-black/90 mb-8 italic">
                 {dict.home.banner.description}
               </p>
               <Link

@@ -116,9 +116,11 @@ export async function getImagesFromFolder(folderName: string) {
 
 export function getAlternateUrl(lang: string, pathname: string) {
   const alternate = photoServiceUrl.find((item) => item.url.find((f) => pathname.includes(f)));
-  if (!alternate) return pathname;
+  if (!alternate)
+    return lang === "vi" ? pathname.replace("en", "vi") : pathname.replace("vi", "en");
   const alternateUrl = alternate.url.find((f) => pathname.includes(f));
-  if (!alternateUrl) return pathname;
+  if (!alternateUrl)
+    return lang === "vi" ? pathname.replace("en", "vi") : pathname.replace("vi", "en");
   return lang === "vi"
     ? pathname.replace("en", "vi").replace(alternateUrl, alternate.viUrl)
     : pathname.replace("vi", "en").replace(alternateUrl, alternate.enUrl);
