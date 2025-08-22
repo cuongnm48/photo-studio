@@ -23,6 +23,11 @@ export async function generateMetadata({
     },
     description: dict.metadata.description,
     generator: "Nhật Studio",
+    icons: {
+      icon: "/favicon.svg", // SVG
+      shortcut: "/favicon.svg", // fallback cho Safari/IE cũ
+      apple: "/favicon.svg", // cho iOS
+    },
   };
 }
 

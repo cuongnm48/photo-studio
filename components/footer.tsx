@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import { ValidLocale } from "@/lib/i18n/config";
+import Image from "next/image";
 
 export default async function Footer({ lang }: { lang: string }) {
   const dict = await getDictionary(lang as ValidLocale);
@@ -60,7 +61,15 @@ export default async function Footer({ lang }: { lang: string }) {
         <div className="grid md:grid-cols-4 gap-8">
           {/* About Section */}
           <div>
-            <h3 className="text-xl font-bold mb-4">{dict.footer.about.title}</h3>
+            <Image
+              src="/logo.jpg"
+              alt="Nhật Studio Logo"
+              width={100}
+              height={100}
+              className="rounded-full"
+              priority
+            />
+            <h3 className="text-xl font-bold my-4">{dict.footer.about.title}</h3>
             <p className="text-gray-300 mb-4">{dict.footer.about.description}</p>
           </div>
 
