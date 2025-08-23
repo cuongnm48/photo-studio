@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "next-sitemap"
+    "postbuild": "npx next-sitemap --config next-sitemap.photobooth.config.js && npx next-sitemap --config next-sitemap.chupanhthe.config.js"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.1",
