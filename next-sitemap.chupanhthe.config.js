@@ -1,5 +1,7 @@
+/** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://chupanhthedanang.vn",
+  siteUrl: "https://chupanhthedanang.vn/chupanhthe",
+  outDir: "./public/chupanhthe",
   generateRobotsTxt: true,
-  outDir: "./public/chupanhthe", // custom folder
+  sitemapSize: 5000,
 };
