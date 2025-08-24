@@ -1,17 +1,16 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { locales, ValidLocale } from "@/lib/i18n/config";
-import { usePathname, useRouter } from "next/navigation";
-import { Globe } from "lucide-react";
+import { locales } from "@/lib/i18n/config";
 import { getAlternateUrl } from "@/lib/utils";
-import { getDomainByLocale } from "@/app/[lang]/dictionaries";
+import { Globe } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 
 const languageNames: Record<string, string> = {
   en: "English",
@@ -24,8 +23,10 @@ export default function LanguageSwitcher() {
 
   const switchLanguage = (newLocale: string) => {
     const segments = getAlternateUrl(newLocale, pathname);
-    console.log(getDomainByLocale(newLocale as ValidLocale) + segments);
-    router.push(getDomainByLocale(newLocale as ValidLocale) + segments);
+    const url =
+      newLocale === "vi" ? process.env.NEXT_PUBLIC_VI_DOMAIN : process.env.NEXT_PUBLIC_EN_DOMAIN;
+    console.log(url + segments);
+    router.push(url + segments);
   };
 
   const currentLocale = pathname.split("/")[1];
