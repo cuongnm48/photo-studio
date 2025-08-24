@@ -17,6 +17,8 @@ const urlEn = [
 ];
 const idEn = ["services", "about-us", "reviews", "contact"];
 
+const posts = ["chup-anh-the-gia-re", "chup-anh-the-lay-ngay", "chup-anh-the-visa-ho-chieu"];
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const headersList = await headers();
   const host = headersList.get("host") || "localhost:3000";
@@ -49,6 +51,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "daily" as const,
         priority: 0.7,
       })),
+      {
+        url: `${domain}/blog`,
+        lastModified: new Date(),
+        changeFrequency: "daily",
+        priority: 0.7,
+      },
+      ...posts.map((e) => ({
+        url: `${domain}/vi/blog/${e}`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: "daily" as const,
+        priority: 0.7,
+      })),
     ];
   }
 
@@ -74,6 +88,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })),
       ...photoTypes.map((e) => ({
         url: `${domain}/en/${urlEn[0]}/${e}`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: "daily" as const,
+        priority: 0.7,
+      })),
+      {
+        url: `${domain}/blog`,
+        lastModified: new Date(),
+        changeFrequency: "daily",
+        priority: 0.7,
+      },
+      ...posts.map((e) => ({
+        url: `${domain}/en/blog/${e}`,
         lastModified: new Date().toISOString(),
         changeFrequency: "daily" as const,
         priority: 0.7,
