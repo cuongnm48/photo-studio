@@ -23,6 +23,7 @@ export default function LanguageSwitcher() {
 
   const switchLanguage = (newLocale: string) => {
     const segments = getAlternateUrl(newLocale, pathname);
+    console.log(segments);
     router.push(segments);
   };
 
