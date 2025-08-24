@@ -7,10 +7,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { locales } from "@/lib/i18n/config";
+import { locales, ValidLocale } from "@/lib/i18n/config";
 import { usePathname, useRouter } from "next/navigation";
 import { Globe } from "lucide-react";
 import { getAlternateUrl } from "@/lib/utils";
+import { getDomainByLocale } from "@/app/[lang]/dictionaries";
 
 const languageNames: Record<string, string> = {
   en: "English",
@@ -23,8 +24,8 @@ export default function LanguageSwitcher() {
 
   const switchLanguage = (newLocale: string) => {
     const segments = getAlternateUrl(newLocale, pathname);
-    console.log(segments);
-    router.push(segments);
+    console.log(getDomainByLocale(newLocale as ValidLocale) + segments);
+    router.push(getDomainByLocale(newLocale as ValidLocale) + segments);
   };
 
   const currentLocale = pathname.split("/")[1];
