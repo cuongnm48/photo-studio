@@ -28,10 +28,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (domain.includes("chupanhthedanang")) {
     return [
       {
-        url: `${domain}/`,
+        url: `${domain}/vi`,
         lastModified: new Date(),
         changeFrequency: "daily",
-        priority: 0.7,
+        priority: 1.0,
       },
       ...idVi.map((e) => ({
         url: `${domain}/vi#${e}`,
@@ -52,7 +52,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       })),
       {
-        url: `${domain}/blog`,
+        url: `${domain}/vi/blog`,
         lastModified: new Date(),
         changeFrequency: "daily",
         priority: 0.7,
@@ -69,10 +69,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (domain.includes("photoboothdanang")) {
     return [
       {
-        url: `${domain}/`,
+        url: `${domain}/en`,
         lastModified: new Date(),
         changeFrequency: "daily",
-        priority: 0.7,
+        priority: 1.0,
       },
       ...idEn.map((e) => ({
         url: `${domain}/en#${e}`,
@@ -93,7 +93,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       })),
       {
-        url: `${domain}/blog`,
+        url: `${domain}/en/blog`,
         lastModified: new Date(),
         changeFrequency: "daily",
         priority: 0.7,

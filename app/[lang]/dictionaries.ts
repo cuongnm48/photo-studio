@@ -28,3 +28,27 @@ export const getCanonicalDomain = (locale: ValidLocale, path: string) => {
   const domain = getDomainByLocale(locale);
   return `${domain}${path}`;
 };
+
+/**
+ * Generate alternate URLs for hreflang tags
+ * Returns object with language codes as keys and full URLs as values
+ */
+export function getAlternateUrls(currentLang: ValidLocale, currentPath: string = "/") {
+  const alternates: Record<string, string> = {};
+  
+  // Remove locale prefix from path if exists (e.g., /vi/blog -> /blog, /en -> /)
+  let pathWithoutLang = currentPath.replace(/^\/(vi|en)(\/|$)/, "/");
+  if (pathWithoutLang === "/") {
+    pathWithoutLang = "";
+  }
+  
+  // Generate alternate URL for each locale
+  const locales: ValidLocale[] = ["vi", "en"];
+  for (const locale of locales) {
+    const domain = getDomainByLocale(locale);
+    const alternatePath = pathWithoutLang ? `/${locale}${pathWithoutLang}` : `/${locale}`;
+    alternates[locale === "vi" ? "vi-VN" : "en-US"] = `${domain}${alternatePath}`;
+  }
+  
+  return alternates;
+}
